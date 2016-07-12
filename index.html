@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <title>Angular2 Aspnet5 Seed</title>
+    <link rel="stylesheet" href="app/bootstrap.css" />
+    <link rel="stylesheet" href="app/app.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="//cdn.auth0.com/js/lock-8.1.min.js"></script>
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+  <script src="node_modules/zone.js/dist/zone.js"></script>
+  <script src="node_modules/reflect-metadata/Reflect.js"></script>
+  <script src="node_modules/systemjs/dist/system.src.js"></script>
+  <script src="app/systemjs.config.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script>
+        System.import('app/main').catch(console.log.bind(console));
+  </script>
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-brand">Shipments</div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a style="font-size: 14px;" href="#">Register</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">Login<strong class="caret"></strong></a>
+                    <div class="dropdown-menu" style="padding: 15px;">
+                        <form action="@Url.Action(" LogIn","User")" method="post" class="form-horizontal navbar-form">
+                            <input class="form-control margin-top" name="UserName" placeholder="Email" />
+                            <input class="form-control margin-top" name="Password" placeholder="Password" />
+                            <input type="submit" class="btn btn-success margin-top pull-right" value="Войти" />
+                        </form>
+                    </div>
+                </li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid" style="margin-top:60px;">
+        <myApp>Loading...</myApp>
+    </div>
+</body>
+</html>

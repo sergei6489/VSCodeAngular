@@ -1,0 +1,105 @@
+﻿<div class="jumbotron">
+    <h1>Commercial</h1>
+    <p>...</p>
+    <p><a class="btn btn-primary btn-lg" role="button">Commercial</a></p>
+</div>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Searching</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="form-group">
+                <div class="form-inline">
+                    <label>Roundtrip:</label>
+                    <md-checkbox [checked]="isRoundTrip" label="RoundTrip:"></md-checkbox>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <comboBoxTemplate [url]="'/Shipments/GetDirectionsFrom'" [text]="'From'" [(value)]="search.from"></comboBoxTemplate>
+                        <comboBoxTemplate [url]="'/Shipments/GetDirectionsTo'" [text]="'To'" [(value)]="search.to"></comboBoxTemplate>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label class="label-Margin">Departure date:</label>
+                        <DateTimePicker [(value)]="search.departureDate" ></DateTimePicker>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-Margin">Return date:</label>
+                        <DateTimePicker  [(value)]="search.returnDate" ></DateTimePicker>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <div class="form-group">
+                    <label class="label-Margin">Highest price:</label>
+                    <div class="col-md-4 input-group">
+                        <input class="form-control" [(ngModel)]="search.highestPrice" required pattern="[0-9]+" />
+                        <span class="input-group-addon">$</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label-Margin">Smallest price:</label>
+                    <div class="col-md-4 input-group">
+                        <input class="form-control" [(ngModel)]="search.smallestPrice" />
+                        <span class="input-group-addon">$</span>
+                    </div>
+                </div>
+            </div>
+            <button type="button" md-raised-button class="pull-right" (click)="Search()">Search</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-5" [hidden]="!isLoad">
+            <md-progress-circle mode="indeterminate">
+            </md-progress-circle>
+        </div>
+        <div class="col-md-offset-1 col-sm-offset-1 col-md-9 col-sm-9" style="padding-left:15px">
+            <md-card class="thumbnail" *ngFor="#shipment of shipments">
+                <h3 class="pull-right">
+                    <label class="label label-warning label-Price">Price:</label>
+                    <label class="label" style="color:black">
+                        {{shipment.price}}
+                        <span class="glyphicon glyphicon-euro"></span>
+                    </label>
+                </h3>
+                <h3>
+                    <label class="label label-primary">Dictionary:</label>
+                </h3>
+                <div class="btn-group pull-right">
+                    <a class="btn btn-danger" [routerLink]="['/buyTickets']">Buy</a>
+                    <a class="btn btn-info" (click)="ShowInfo(shipment)">Info</a>
+                    <a class="btn btn-info" (click)="EditInfo(shipment)">Edit</a>
+                </div>
+                <h4>
+                    <label class="label label-info">{{shipment.from}}</label>
+                    <span class="glyphicon glyphicon-arrow-right"></span>
+                    <label class="label label-info"> {{shipment.to}}</label>
+                </h4>
+                <h5>
+                    <label>Date:</label>
+                    {{shipment.dateTimeInput | date:'yyyy-MM-dd'}}
+                    <label>Time:</label>
+                    {{shipment.dateTimeInput | date:'hh:mm'}}
+                </h5>
+            </md-card>
+        </div>
+    </div>
+    <div class="row">
+        <ul class="pager">
+            <li [class.disabled]="search.pageIndex == 1 "><a href="javascript:void(0)" (click)="previewPage()">Preview</a></li>
+            <li [class.disabled]="search.pageIndex >= search.pageCount"><a href="javascript:void(0)" (click)="nextPage()">Next</a></li>
+        </ul>
+    </div>
+</div>
+<shipment-detail #shipmentDetail></shipment-detail>
+<shipment-edit #shipmentEdit></shipment-edit>

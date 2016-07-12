@@ -1,0 +1,17 @@
+ .ui-datepicker{z-index:1151 !important;}
+        .sidebar {
+            display: none;
+        }
+
+        .label-Price {
+            display: none;
+        }
+
+        .ng-invalid {
+            border-left: 5px solid #a94442; 
+        }
+
+        .label-Margin {
+            margin-right: 8px;
+            margin-left: 8px;
+        }
