@@ -4,7 +4,7 @@ var tsc = require('gulp-typescript');
 var tslint = require('gulp-tslint');
 var tsProject = tsc.createProject('tsconfig.json');
 var config = require('./gulp.config')();
-
+var concat = require('gulp-concat')
 var browserSync = require('browser-sync');
 var superstatic = require('superstatic');
 
@@ -31,6 +31,17 @@ gulp.task('compile-ts', function() {
         .pipe(gulp.dest(config.tsOutputPath));
 });
 
+gulp.task('build:server', function () {
+	var localProject = tsc.createProject('server/tsconfig.json');
+    var tsResult = gulp.src('server/**/*.ts')
+		.pipe(sourcemaps.init())
+        .pipe(tsc(localProject))
+	return tsResult.js
+        .pipe(concat('server.js'))
+        .pipe(sourcemaps.write()) 
+		.pipe(gulp.dest('./'))
+});
+
 gulp.task('serve', ['ts-lint', 'compile-ts'], function() {
     	
     gulp.watch([config.allTs], ['ts-lint', 'compile-ts']);
@@ -50,4 +61,4 @@ gulp.task('serve', ['ts-lint', 'compile-ts'], function() {
     });	
 });
 
-gulp.task('default', ['serve']);
+gulp.task('default', ['build:server']);
