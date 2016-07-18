@@ -3,11 +3,12 @@ import path = require('path');
 var port: number = process.env.PORT || 3000;
 var app = express();
 
-app.use('/app', express.static(path.resolve(__dirname, 'app')));
-app.use('/node_modules', express.static(path.resolve(__dirname, 'node_modules')));
+app.use('/css', express.static(path.resolve(__dirname, 'css')));
+app.use('/node_modules', express.static(path.resolve(__dirname, '/node_modules')));
+app.use('/client', express.static(path.resolve(__dirname, 'client')));
 
 var renderIndex = (req: express.Request, res: express.Response) => {
-    res.sendFile(path.resolve(__dirname, 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client/index.html'));
 }
 
 app.get('/*', renderIndex);

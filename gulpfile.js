@@ -25,7 +25,14 @@ gulp.task('compile-ts', function() {
         .src(sourceTsFiles)
         .pipe(sourcemaps.init())
         .pipe(tsc(tsProject));
-
+        // копируем systemjs.config.js 
+        gulp.src([config.systemjs]).pipe(gulp.dest('./debug/client/'));
+        // копируем css
+        gulp.src([config.css]).pipe(gulp.dest('./debug/client/css/'));
+        // копируем шаблоны angular
+        gulp.src([config.partials]).pipe(gulp.dest('./debug/client/views/'));
+        // копируем главный html
+        gulp.src(['index.html']).pipe(gulp.dest('./debug/client'));
     return tsResult.js
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(config.tsOutputPath));
@@ -33,13 +40,13 @@ gulp.task('compile-ts', function() {
 
 gulp.task('build:server', function () {
 	var localProject = tsc.createProject('server/tsconfig.json');
-    var tsResult = gulp.src('server/**/*.ts')
+    var tsResult = gulp.src('server/**/*')
 		.pipe(sourcemaps.init())
-        .pipe(tsc(localProject))
+        .pipe(tsc(localProject));
 	return tsResult.js
-        .pipe(concat('server.js'))
         .pipe(sourcemaps.write()) 
-		.pipe(gulp.dest('./'))
+		.pipe(gulp.dest('./debug/'))
+
 });
 
 gulp.task('serve', ['ts-lint', 'compile-ts'], function() {
@@ -61,4 +68,4 @@ gulp.task('serve', ['ts-lint', 'compile-ts'], function() {
     });	
 });
 
-gulp.task('default', ['build:server']);
+gulp.task('default', ['build:server','compile-ts']);

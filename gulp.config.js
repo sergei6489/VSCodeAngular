@@ -1,7 +1,10 @@
 module.exports = function() {
 	var config = {
+		systemjs:'./Scripts/systemjs.config.js',
+		css:'./css/*',
 		allTs: './Scripts/**/*.ts',
-		tsOutputPath: './app/' 	
+		partials:'./Scripts/partials/*.html',
+		tsOutputPath: './debug/client/'
 	};
 	
 	return config;
