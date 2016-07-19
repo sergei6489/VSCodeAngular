@@ -5,7 +5,7 @@ import { ElementRef } from '@angular/core';
 
 @Component({
     selector: "shipment-detail",
-    templateUrl: "app/partials/shipment-details.html",
+    templateUrl: "client/views/shipment-details.html",
     styles: [`
         .sidebar{
             position:fixed;

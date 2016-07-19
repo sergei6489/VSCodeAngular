@@ -5,7 +5,7 @@ import {ElementRef} from '@angular/core';
 
 @Component({
     selector: "shipment-edit",
-    templateUrl: "app/partials/shipment-edit.html"
+    templateUrl: "client/views/shipment-edit.html"
 })
 export class ShipmentEditComponent {
     shipment = new Shipment(1, "Barcelona", "Moscow", new Date(), new Date(), [], 4555);

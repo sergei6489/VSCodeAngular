@@ -17,7 +17,7 @@ import {MD_CARD_DIRECTIVES} from "@angular2-material/card";
 @Component({
     selector: "testProject",
     providers: [ShipmentService, SearchViewModel ],
-    templateUrl: "app/partials/Main.html",
+    templateUrl: "client/views/Main.html",
     directives: [MD_CARD_DIRECTIVES,MdButton, MD_CHECKBOX_DIRECTIVES, MD_PROGRESS_CIRCLE_DIRECTIVES, ShipmentDetailComponent, ShipmentEditComponent, SearchControl, DateTimeControl, ROUTER_DIRECTIVES]
 })
 

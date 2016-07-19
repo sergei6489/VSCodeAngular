@@ -55,7 +55,7 @@ gulp.task('serve', ['ts-lint', 'compile-ts'], function() {
 	
     browserSync({
         port: 3000,
-        files: ['index.html', 'app/**/*.js', 'app/**/*.html'],
+        files: ['index.html', 'debug/client/**/*.js', 'debug/client/**/*.html'],
         injectChanges: true,
         logFileChanges: false,
         logLevel: 'silent',    
