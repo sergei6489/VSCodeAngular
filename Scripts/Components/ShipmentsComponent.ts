@@ -56,7 +56,7 @@ export class ShipmentsComponent implements OnInit {
         setTimeout(function () {
             self.service.getShipments(self.search).
                 subscribe(res => {
-                    res.Result.forEach((data: Shipment) => {
+                    res.result.forEach((data: Shipment) => {
                         self.shipments.push(new Shipment(data.id, data.from, data.to, new Date(data.dateTimeOut), new Date(data.dateTimeInput), data.places, data.price));
                     });
                     self.search.pageCount = res.PageCount;

@@ -1,4 +1,3 @@
-///<reference path="../typings/tsd.d.ts" />
 import {IShipmentService}  from  "./IShipmentService";
 import {Shipment} from  "../dataModels/ShipmentViewModel";
 import {PagerShipmentsViewModel} from "../dataModels/PagerShipmentsViewModel";
@@ -32,13 +31,7 @@ export class MockShipmentService implements IShipmentService
     }
    GetShipments(search: SearchViewModel): Array<Shipment>
    {
-        var numbers = new Array<number>();
-        while (numbers.length<50) {
-            numbers.push(numbers.length+1);
-        }
-        var data = new  Array<Shipment>();
-        data.push();
-        return data;
+     return this.MockShipments;
    }
    GetShipment(id: number): Shipment
    {
@@ -49,9 +42,12 @@ export class MockShipmentService implements IShipmentService
    }
    GetDirectionsFrom(value: string): Array<string>
    {
-        let result: Array<string>;
-        this.MockShipments.forEach(n=>{
-            if (n.from.search(value) && ($.inArray( n.to,result ) == -1))
+        let result: string[];
+        result = [];
+        value = value.toLowerCase();
+        this.MockShipments.forEach(n=>
+        {
+            if (n.from.toLowerCase().indexOf(value)>-1 && result.indexOf(n.from) == -1)
             {
                 result.push(n.from);
             }
@@ -60,9 +56,12 @@ export class MockShipmentService implements IShipmentService
    }
    GetDirectionsTo(value: string): Array<string>
    {
-       let result: Array<string>;
-        this.MockShipments.forEach(n=>{
-            if (n.to.search(value) && ($.inArray( n.to,result ) == -1))
+       let result: string[];
+       result = [];
+       value = value.toLowerCase();
+       this.MockShipments.forEach(n=>
+       {
+            if (n.to.toLowerCase().indexOf(value)>-1 && result.indexOf( n.to ) == -1)
             {
                 result.push(n.to);
             }

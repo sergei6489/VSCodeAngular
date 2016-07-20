@@ -28,10 +28,10 @@ export class SearchControl {
     getData(value) {
         value = value == undefined ? "" : value;
         this.http.get(this.url+"?data=" + value).map(res =>
-            res.json()).map((directions: Array<string>) => {
+            res.json()).map((data: any) => {
             this.directions = [];
-            directions.forEach((data: string) => { this.directions.push(data) });
-            if (directions.length != 0 && !jQuery(this.menuRef.nativeElement).parent().hasClass('open')) {
+            data.result.forEach((data: string) => { this.directions.push(data) });
+            if (data.result.length != 0 && !jQuery(this.menuRef.nativeElement).parent().hasClass('open')) {
                 jQuery(this.menuRef.nativeElement).dropdown('toggle');
             }
             }).subscribe();

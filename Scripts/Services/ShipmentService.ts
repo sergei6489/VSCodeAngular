@@ -18,7 +18,7 @@ export class ShipmentService
     getShipments( search: SearchViewModel ) {
         this.headers = new Headers({ 'Content-Type': 'application/json' });
         this.options = new RequestOptions({ headers: this.headers });
-        return this.http.post('http://localhost:4163/shipments/Get', JSON.stringify(search), this.options)
+        return this.http.post('/shipments/search', JSON.stringify(search), this.options)
             .map(this.ExtractData).catch(this.handleError);
     }
 
