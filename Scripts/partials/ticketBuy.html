@@ -1,0 +1,10 @@
+<div class="col-md-offset-1 col-sm-offset-1 col-md-9 col-sm-9" style="padding-left:15px">
+<md-card *ngFor="#people of peoples">
+    <md-card-title>Add people</md-card-title>
+    <md-card-content>
+        <md-input class="demo-full-width" placeholder="Name"  [value]="people.name"></md-input>
+        <md-input class="demo-full-width" placeholder="SurName"  [value]="people.surname"></md-input>
+        <md-checkbox [checked]="people.is" label="RoundTrip:"></md-checkbox>
+    </md-card-content>
+</md-card>
+</div>

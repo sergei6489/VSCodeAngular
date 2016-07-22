@@ -6,4 +6,4 @@ import {LocationStrategy, Location, HashLocationStrategy } from '@angular/common
 import {provide} from '@angular/core'
 
 
-bootstrap(appMain, [HTTP_PROVIDERS, APP_ROUTER_PROVIDERS, provide(LocationStrategy, { useClass: HashLocationStrategy })]);
+bootstrap(appMain, [HTTP_PROVIDERS, APP_ROUTER_PROVIDERS]);

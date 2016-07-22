@@ -10,6 +10,7 @@
     '@angular2-material/card': 'node_modules/@angular2-material/card',
     '@angular2-material/input': 'node_modules/@angular2-material/input',
     '@angular2-material/toolbar': 'node_modules/@angular2-material/toolbar',
+    '@angular2-material/list': 'node_modules/@angular2-material/list',
     'app': 'client', // 'dist',
     'rxjs': 'node_modules/rxjs',
     'symbol-observable': 'node_modules/symbol-observable',
@@ -25,6 +26,7 @@
     '@angular2-material/card': { main: 'card.js', defaultExtension: 'js'},
     '@angular2-material/input': { main: 'input.js', defaultExtension: 'js'},
     '@angular2-material/toolbar': { main: 'toolbar.js', defaultExtension: 'js'},
+    '@angular2-material/list': { main: 'list.js', defaultExtension: 'js'},
     'app': { main: 'main.js', defaultExtension: 'js' },
     'rxjs': { defaultExtension: 'js' },
     'symbol-observable': { main: 'index.js', defaultExtension: 'js' }

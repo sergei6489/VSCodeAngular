@@ -4,5 +4,5 @@ import {TicketComponent } from "../Components/TicketComponent"
 
 export const ShipmentsRouters: RouterConfig = [
     { path: '', component: ShipmentsComponent },
-    { path: 'ticketBuy:id', component: TicketComponent }
+    { path: 'ticketBuy', component: TicketComponent }
 ]
