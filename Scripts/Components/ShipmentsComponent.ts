@@ -22,8 +22,8 @@ import {MD_CARD_DIRECTIVES} from "@angular2-material/card";
 })
 
 export class ShipmentsComponent implements OnInit {
-    @ViewChild("shipmentDetail") detail: ShipmentDetailComponent;
-    @ViewChild("shipmentEdit") edit: ShipmentEditComponent;
+    //@ViewChild("shipmentDetail") detail: ShipmentDetailComponent;
+   // @ViewChild("shipmentEdit") edit: ShipmentEditComponent;
     shipments: Array<Shipment> = [];
     errorText: string;
     isLoad: boolean;
@@ -82,10 +82,10 @@ export class ShipmentsComponent implements OnInit {
 
     // показать детальную информацию по маршруту
     ShowInfo(shipment: Shipment) {
-        this.detail.OnShowDialog(shipment);
+       // this.detail.OnShowDialog(shipment);
     }
 
     EditInfo(shipment: Shipment) {
-        this.edit.OnShowDialog(shipment);
+       // this.edit.OnShowDialog(shipment);
     }
 }

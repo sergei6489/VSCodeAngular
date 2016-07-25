@@ -29,9 +29,8 @@ import {Passenger} from "../ViewModels/Passenger";
                             <h4 md-line>{{passenger.surname}} </h4>
                             <h4 md-line>{{passenger.age}} </h4>
                             <button md-icon-button color="warn" (click)="removePassenger(passenger)" >
-                                   <i class="material-icons" md-24>check</i>
+                                <i class="material-icons" md-24>check</i>
                             </button>
-                            <md-divider></md-divider>
                          </md-list-item>
                     </md-list>
                     <form [formGroup]="myForm">
@@ -42,7 +41,7 @@ import {Passenger} from "../ViewModels/Passenger";
                                     <tr>
                                         <md-input style="width:100%"  placeholder="Name" [formControl]="namefc" [(ngModel)]="currentPassenger.name" ></md-input>
                                     </tr>
-                                    <tr>
+                                    <tr>   
                                         <md-input style="width:100%"  placeholder="SurName" [formControl]="surnamefc" [(ngModel)]="currentPassenger.surname" ></md-input>
                                     </tr>
                                     <tr>
@@ -60,7 +59,7 @@ import {Passenger} from "../ViewModels/Passenger";
                     </md-card>   
                     </form>   
             </div>`
-})
+})  
 
 export class PassengersControl
 {
@@ -81,7 +80,6 @@ export class PassengersControl
         this.addNewPassenger();
         this.buildForm();
     }
-
     buildForm()
     {
         this.namefc = new FormControl(this.currentPassenger.name,Validators.required);
@@ -95,7 +93,6 @@ export class PassengersControl
             "ismalefc": this.ismalefc,
         });
     }
-
 
     addNewPassenger()
     {
@@ -126,7 +123,6 @@ export class PassengersControl
             {
             
             }
-
         }
         
     }

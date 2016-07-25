@@ -7,22 +7,11 @@ var config = require('./gulp.config')();
 var concat = require('gulp-concat')
 var browserSync = require('browser-sync');
 var superstatic = require('superstatic');
+var nodemon = require('gulp-nodemon');
 
-gulp.task('ts-lint', function() {
-    return gulp.src(config.allTs)
-        .pipe(tslint())
-        .pipe(tslint.report('prose', {
-            emitError: false
-        }));
-})
-
-gulp.task('compile-ts', function() {
-    var sourceTsFiles = [
-        config.allTs
-    ];
-
+gulp.task('build-client', function() {
     var tsResult = gulp
-        .src(sourceTsFiles)
+        .src(config.clientTs)
         .pipe(sourcemaps.init())
         .pipe(tsc(tsProject));
         // копируем systemjs.config.js 
@@ -40,32 +29,38 @@ gulp.task('compile-ts', function() {
 
 gulp.task('build:server', function () {
 	var localProject = tsc.createProject('server/tsconfig.json');
-    var tsResult = gulp.src('server/**/*')
+    gulp.src(config.nodeTs)
 		.pipe(sourcemaps.init())
-        .pipe(tsc(localProject));
-	return tsResult.js
+        .pipe(tsc(localProject)).js
         .pipe(sourcemaps.write()) 
-		.pipe(gulp.dest('./debug/'))
-
+		.pipe(gulp.dest('./debug/'));
 });
 
-gulp.task('serve', ['ts-lint', 'compile-ts'], function() {
-    	
-    gulp.watch([config.allTs], ['ts-lint', 'compile-ts']);
+gulp.task('nodemon', function (cb) {
 	
-    browserSync({
-        port: 3000,
-        files: ['index.html', 'debug/client/**/*.js', 'debug/client/**/*.html'],
+	var started = false;
+	
+	return nodemon({
+		script: 'debug/server.js'
+	}).on('start', function () {
+		if (!started) {
+			cb();
+			started = true; 
+		} 
+	});
+    });
+
+gulp.task('default', [ 'build-client', 'build:server', 'nodemon'],function () {
+    gulp.watch([config.clientTs], ['build-client',browserSync.reload]);
+    gulp.watch([config.nodeTs],['build-server']);
+     browserSync.init(null, {
+		proxy: "http://localhost:3000",
+        files: ['debug/**/*.js', 'debug/**/*.html'],
         injectChanges: true,
         logFileChanges: false,
         logLevel: 'silent',    
         notify: true,
-        reloadDelay: 0,
-        server: {
-            baseDir: ['./'],
-            middleware: superstatic({ debug: false})
-        }
-    });	
-});
-
-gulp.task('default', ['build:server','compile-ts']);
+        reloadDelay: 3000,
+        port: 5000,
+	});
+}); 

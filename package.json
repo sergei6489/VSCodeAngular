@@ -44,6 +44,7 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-tslint": "^3.2.0",
     "gulp-typescript": "^2.13.4",
+    "gulp-nodemon":"2.1.0",
     "superstatic": "^1.2.3",
     "typings": "1.0.4",
     "typescript": "1.8.10"
