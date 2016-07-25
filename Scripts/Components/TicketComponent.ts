@@ -4,7 +4,7 @@ import { Passenger } from '../ViewModels/Passenger';
 import {MdInput} from "@angular2-material/input";
 
 @Component({
-    template:"<md-input  placeholder='What do you need to do?' ></md-input>",
+    template:"<passengers-control [passengers]='passengers'></passengers-control>",
     directives:[PassengersControl,MdInput]
 })
 

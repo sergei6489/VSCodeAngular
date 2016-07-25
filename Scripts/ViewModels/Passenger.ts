@@ -4,5 +4,5 @@ export class Passenger
     public name: string;
     public surname:string;
     public age:string;
-    public isMail:boolean;
+    public isMale:boolean;
 }
