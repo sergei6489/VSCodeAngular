@@ -24,31 +24,42 @@ import {Passenger} from "../ViewModels/Passenger";
     selector:"passengers-control",
     template:`<div class="col-md-offset-3 col-sm-offset-3 col-md-5 col-sm-5" style="padding-left:15px">
                      <md-list>
-                         <md-list-item *ngFor='let passenger of passengers'>
-                            <h4 md-line>{{passenger.name}} </h4>
-                            <h4 md-line>{{passenger.surname}} </h4>
-                            <h4 md-line>{{passenger.age}} </h4>
-                            <button md-icon-button color="warn" (click)="removePassenger(passenger)" >
-                                <i class="material-icons" md-24>check</i>
-                            </button>
-                         </md-list-item>
+                            <md-list-item layout="row">
+                                          <md-input-container md-no-float class="navbar-search">
+                                        <md-checkbox>tvgtgv</md-checkbox>
+                                        <button md-icon-button color="warn" (click)="removePassenger(passenger)" >
+                                            <i class="material-icons" md-24>delete</i>
+                                        </button>
+                                        </md-input-container>
+                            </md-list-item>
+                         <md-divider></md-divider>
+                            <md-list-item *ngFor='let passenger of passengers'>
+                            <md-checkbox [checked]="passenger.isSelect"> </md-checkbox>
+                                <h4 md-line>{{passenger.name}} </h4>
+                                <h4 md-line>{{passenger.surname}} </h4>
+                                <h4 md-line>{{passenger.age}} </h4>
+                                <button md-icon-button (click)="removePassenger(passenger)" >
+                                    <i class="material-icons" md-24>delete</i>
+                                </button>
+                            </md-list-item>
                     </md-list>
                     <form [formGroup]="myForm">
                     <md-card >
-                        <md-toolbar color="accent">Basic</md-toolbar>
                             <md-card-content>
                                 <table style="width:100%" >
                                     <tr>
-                                        <md-input style="width:100%"  placeholder="Name" [formControl]="namefc" [(ngModel)]="currentPassenger.name" ></md-input>
-                                    </tr>
-                                    <tr>   
+                                      <td>
+                                        <md-input style="width:95%"  placeholder="Name" [formControl]="namefc" [(ngModel)]="currentPassenger.name" ></md-input>
+                                      </td>
+                                      <td>
                                         <md-input style="width:100%"  placeholder="SurName" [formControl]="surnamefc" [(ngModel)]="currentPassenger.surname" ></md-input>
+                                      </td>
                                     </tr>
                                     <tr>
-                                        <md-input  placeholder="Age" ></md-input>
+                                        <md-input  placeholder="Age" [formControl]="agefc" [(ngModel)]="currentPassenger.age" ></md-input>
                                     </tr>
                                     <tr>
-                                        <md-slide-toggle></md-slide-toggle>
+                                        <md-slide-toggle>IsMale</md-slide-toggle>
                                     </tr>
                                 </table>
                             </md-card-content>
@@ -82,10 +93,10 @@ export class PassengersControl
     }
     buildForm()
     {
-        this.namefc = new FormControl(this.currentPassenger.name,Validators.required);
-        this.surnamefc = new FormControl(this.currentPassenger.surname,Validators.required);
-        this.agefc = new FormControl(this.currentPassenger.age);
-        this.ismalefc = new FormControl(this.currentPassenger.isMale);
+        this.namefc = new FormControl('', Validators.required);
+        this.surnamefc = new FormControl('', Validators.required);
+        this.agefc = new FormControl(18, Validators.required);
+        this.ismalefc = new FormControl(true, Validators.required);
         this.myForm = this.fb.group({
             "namefc": this.namefc,
             "surnamefc": this.surnamefc,
@@ -96,7 +107,7 @@ export class PassengersControl
 
     addNewPassenger()
     {
-        this.currentPassenger = new Passenger();
+        this.currentPassenger = new Passenger(0, '', '', 0, false);
         this.isNew=true;
     }
 
@@ -107,7 +118,7 @@ export class PassengersControl
 
     editPassenger(item: Passenger)
     {
-        this.currentPassenger = item;
+        this.currentPassenger = new Passenger(item.id, item.name, item.surname, item.age, item.isMale);
         this.isNew = false;
     }
     saveEditing()
@@ -121,9 +132,14 @@ export class PassengersControl
             }
             else
             {
-            
+            this.passengers.forEach(n=>
+            {
+                if (n.id == this.currentPassenger.id)
+                {
+                    n.updatePassenger(this.currentPassenger);
+                }
+            });
             }
-        }
-        
+        }     
     }
 }

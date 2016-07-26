@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 })); 
 // public folders css,js libs
-app.use('/css', express.static(path.resolve(__dirname, 'css')));
+app.use('/css', express.static(path.resolve(__dirname, 'client/css')));
 app.use('/node_modules', express.static(path.resolve(__dirname, '../node_modules')));
 app.use('/client', express.static(path.resolve(__dirname, 'client')));
 // node js router
