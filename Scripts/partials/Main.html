@@ -55,7 +55,7 @@
                     </div>
                 </div>
             </div>
-            <button type="button" md-raised-button class="pull-right" (click)="Search()">Search</button>
+            <button type="button"  class="btn btn-primary pull-right" (click)="Search()">Search</button>
         </div>
     </div>
     <div class="row">
@@ -64,7 +64,7 @@
             </md-progress-circle>
         </div>
         <div class="col-md-offset-1 col-sm-offset-1 col-md-9 col-sm-9" style="padding-left:15px">
-            <md-card class="thumbnail" *ngFor="#shipment of shipments">
+            <div class="thumbnail" *ngFor="#shipment of shipments">
                 <h3 class="pull-right">
                     <label class="label label-warning label-Price">Price:</label>
                     <label class="label" style="color:black">
@@ -91,7 +91,7 @@
                     <label>Time:</label>
                     {{shipment.dateTimeInput | date:'hh:mm'}}
                 </h5>
-            </md-card>
+            </mdiv>
         </div>
     </div>
     <div class="row">
