@@ -44,28 +44,32 @@ import {Passenger} from "../ViewModels/Passenger";
                             </md-list-item>
                     </md-list>
                     <form [formGroup]="myForm">
-                    <div class="panel panel-default clearfix">
-                          <form>
+                    <div class="card clearfix">
+                          <form style="padding:10px">
                             <div class="form-group">
-                                <div class="form-inline">
+
                                     <div class="form-group">
                                         <label>Name:</label>
                                         <input class="form-control" placeholder="Name" [formControl]="namefc" [(ngModel)]="currentPassenger.name" >
                                     </div>
                                     <div class="form-group">
+                                        <label>SurName:</label>
                                         <input class="form-control" placeholder="SurName" [formControl]="surnamefc" [(ngModel)]="currentPassenger.surname" >
                                     </div>
-                                </div>
+                           
                              </div>
-                                <div class="form-inline">
-                                    <div class="form-group">
-                                        <input class="form-control" placeholder="Age" [formControl]="agefc" [(ngModel)]="currentPassenger.age" >
+                                   <div class="form-group row">
+                                        <label for="example-number-input" class="col-xs-2 col-form-label">Number</label>
+                                        <div class="col-xs-10">
+                                            <input class="form-control" type="number" value="42" id="example-number-input">
+                                        </div>
                                     </div>
-                                    <md-slide-toggle>IsMale</md-slide-toggle>
-                                </div>
-                                        
+                                    <div class="form-group">
+                                        <label>IsMale</label>
+                                        <input class="form-check-input" type="checkbox" value="">
+                                    </div>        
                                 <div class="form-group">
-                                    <div class="btn-group pull-right">
+                                    <div class="pull-right">
                                         <button class="btn"  (click)="saveEditing()">Save</button>
                                         <button class="btn">Clear</button>
                                     </div>

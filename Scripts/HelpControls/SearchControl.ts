@@ -3,15 +3,18 @@ import {Component, ElementRef, ViewChild, Input, Output, EventEmitter } from '@a
 import {Http} from "@angular/http"
 @Component({
     selector: 'comboBoxTemplate',
-    template:`<label class="label-Margin">{{text}}:</label>
+    template:`
+                    <label class="label-Margin">{{text}}:</label>
+                    <div class="form-group"> 
                     <div class="input-group">
                         <input [(ngModel)]="value" class="form-control" (input)="Changed($event.target.value)"/>
                         <div class="input-group-btn">
                             <button type="button" (click)="click()"  class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                             <ul #menuRef class="dropdown-menu dropdown-menu-right" role="menu">
-                                <li *ngFor="#direction of directions" class="input-lg"><a href="javascript:void(0)" (click)="selectItem($event)" >{{direction}}</a></li>
+                                <li *ngFor="#direction of directions" class="dropdown-item"><a href="javascript:void(0)" (click)="selectItem($event)" >{{direction}}</a></li>
                             </ul>
                         </div>
+                    </div>
                     </div>`
 })
 export class SearchControl {

@@ -7,8 +7,8 @@ import {Http} from "@angular/http"
     template: `<div class="input-group">
                  <input type="text" class="form-control" #dateControl [(ngModel)]='value'/>
                 <div class="input-group-btn">
-                    <button (click)="clear()" class="btn btn-default"><span class="glyphicon glyphicon-remove"></span></button>
-                    <button (click)="openDatePicker()" class="btn btn-default"><span class="glyphicon glyphicon-calendar"></span></button>
+                    <button (click)="clear()" class="btn btn-secondary"><i class="fa fa-times fa-2" aria-hidden="true"></i></button>
+                    <button (click)="openDatePicker()" class="btn btn-primary"><span class="fa fa-calendar"></span></button>
                 </div>
                </div>`
 

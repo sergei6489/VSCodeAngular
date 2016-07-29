@@ -36,7 +36,8 @@
     "jquery-ui": "^1.10.5",
     "gulp-concat": "2.6.0",
     "body-parser":"*",
-    "zone.js": "^0.6.12"
+    "zone.js": "^0.6.12",
+    "font-awesome":"*"
     },
     "devDependencies": {
     "browser-sync": "^2.9.3",
