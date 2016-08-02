@@ -24,7 +24,7 @@ import {Passenger} from "../ViewModels/Passenger";
         REACTIVE_FORM_DIRECTIVES,
         FORM_DIRECTIVES],
     selector:"passengers-control",
-    template:`<div class="col-md-offset-3 col-sm-offset-3 col-md-5 col-sm-5" style="padding-left:15px">                   
+    template:`<div class="offset-md-3 offset-sm-3 col-md-5 col-sm-5" style="padding-left:15px">                   
                      <md-list>
                             <md-list-item>                                
                                 <md-checkbox [checked]="selected" [hidden]="passengers.length==0" (click)="selectAllPassenger()"></md-checkbox>
@@ -43,40 +43,48 @@ import {Passenger} from "../ViewModels/Passenger";
                                 </button>
                             </md-list-item>
                     </md-list>
-                    <form [formGroup]="myForm">
+                    
                     <div class="card clearfix">
-                          <form style="padding:10px">
-                            <div class="form-group">
-
-                                    <div class="form-group">
-                                        <label>Name:</label>
-                                        <input class="form-control" placeholder="Name" [formControl]="namefc" [(ngModel)]="currentPassenger.name" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label>SurName:</label>
+                        <div class="card-header">
+                            <h4>
+                                <label>Add passenger</label>
+                            </h4>
+                        </div>
+                        <div class="card-block">
+                            <form [formGroup]="myForm" class="form-horizontal">
+                                <div class="form-group clearfix">
+                                   <label class="col-md-2">Name:</label>
+                                   <div class="col-md-7">
+                                        <input class="form-control " placeholder="Name" [formControl]="namefc" [(ngModel)]="currentPassenger.name" >
+                                   </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-md-2">SurName:</label>
+                                   <div class="col-md-7">
                                         <input class="form-control" placeholder="SurName" [formControl]="surnamefc" [(ngModel)]="currentPassenger.surname" >
                                     </div>
-                           
-                             </div>
-                                   <div class="form-group row">
-                                        <label for="example-number-input" class="col-xs-2 col-form-label">Number</label>
-                                        <div class="col-xs-10">
-                                            <input class="form-control" type="number" value="42" id="example-number-input">
-                                        </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label for="example-number-input" class="col-md-2 col-form-label">Number</label> 
+                                    <div class="col-md-3">                                    
+                                        <input class="form-control" type="number" value="42" id="example-number-input">
                                     </div>
-                                    <div class="form-group">
-                                        <label>IsMale</label>
-                                        <input class="form-check-input" type="checkbox" value="">
-                                    </div>        
-                                <div class="form-group">
+                                 </div>
+                                  <div class="form-group">
+                                        <div class="checkbox">
+                                            <label>
+                                            <input type="checkbox"> IsMale
+                                            </label>
+                                        </div>
+                                 </div> 
+                                <div class="form-group clearfix">
                                     <div class="pull-right">
                                         <button class="btn"  (click)="saveEditing()">Save</button>
                                         <button class="btn">Clear</button>
                                     </div>
-                                </div>
-                           </form>
-                    </div>   
-                    </form>   
+                                </div> 
+                            </form>
+                        </div> 
             </div>`
 })  
 

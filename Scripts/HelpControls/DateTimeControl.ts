@@ -6,7 +6,7 @@ import {Http} from "@angular/http"
     selector: 'DateTimePicker',
     template: `<div class="input-group">
                  <input type="text" class="form-control" #dateControl [(ngModel)]='value'/>
-                <div class="input-group-btn">
+                <div class="input-group-btn hidden-sm-down">
                     <button (click)="clear()" class="btn btn-secondary"><i class="fa fa-times fa-2" aria-hidden="true"></i></button>
                     <button (click)="openDatePicker()" class="btn btn-primary"><span class="fa fa-calendar"></span></button>
                 </div>

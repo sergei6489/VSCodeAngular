@@ -51,8 +51,8 @@ gulp.task('nodemon', function (cb) {
     });
 
 gulp.task('default', [ 'build-client', 'build:server', 'nodemon'],function () {
-    gulp.watch([config.clientTs,"index.html"], ['build-client',browserSync.reload]);
-    gulp.watch([config.nodeTs],['build-server']);
+    gulp.watch([config.clientTs,config.partials,"index.html"], ['build-client',browserSync.reload]);
+    gulp.watch([config.nodeTs,config.partials],['build:server']);
      browserSync.init(null, {
 		proxy: "http://localhost:3000",
         files: ['debug/**/*.js', 'debug/**/*.html'],
