@@ -7,13 +7,11 @@ import {PagerShipmentsViewModel} from "../ViewModels/PagerShipmentsViewModel"
 import { Observable }  from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import {BaseService} from "./BaseService";
+
 @Injectable()
-export class ShipmentService
+export class ShipmentService extends BaseService
 {
-    private headers: Headers;
-    private options: RequestOptions;
-    public constructor(public http: Http) {
-    }
 
     getShipments( search: SearchViewModel ) {
         this.headers = new Headers({ 'Content-Type': 'application/json' });
@@ -34,15 +32,5 @@ export class ShipmentService
             map(res => res.json()).subscribe();
     }
 
-    private ExtractData(res: Response) {
-        if (res.status < 200 || res.status >= 300)
-            throw new Error('Response error:' + res.status);
-        let result = res.json();
-        return result || {};
-    }
-    private handleError(error: any) {
-        let errMsg = error.message || 'Server error';
-        console.error(errMsg); 
-        return Observable.throw(errMsg);
-    }
+    
 }
