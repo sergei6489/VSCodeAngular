@@ -12,10 +12,12 @@ import {BaseService} from "./BaseService";
 @Injectable()
 export class ShipmentService extends BaseService
 {
+    public constructor(http: Http)
+    {
+        super(http);
+    }
 
     getShipments( search: SearchViewModel ) {
-        this.headers = new Headers({ 'Content-Type': 'application/json' });
-        this.options = new RequestOptions({ headers: this.headers });
         return this.http.post('/shipments/search', JSON.stringify(search), this.options)
             .map(this.ExtractData).catch(this.handleError);
     }

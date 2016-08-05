@@ -1,12 +1,20 @@
 ﻿import {RouterConfig} from "@angular/router";
 import {UsersViewComponent } from "../Components/UsersViewComponent";
-import {UserInfoComponent} from "../Components/UserInfoComponent";
+import {UserEditComponent} from "../Components/UserEditComponent";
 import {UserRegisterComponent} from "../Components/UserRegisterComponent";
 import {UserLoginComponent} from "../Components/UserLoginComponent"
 
 export const UserRoutes: RouterConfig = [
-    { path: "UsersView", component: UsersViewComponent },
-    { path: "UserInfo/:id", component: UserInfoComponent },
-    { path: "UserRegister", component: UserRegisterComponent },
-    { path: "UserLogin", component: UserLoginComponent }
+    { 
+        path: "users", component: UsersViewComponent,
+        children:[
+            { path:"edit/id:", component: UserEditComponent}
+        ] 
+    },
+    {
+        path:"login", component: UserLoginComponent
+    },
+    {
+        path:"register", component: UserEditComponent
+    }
 ]

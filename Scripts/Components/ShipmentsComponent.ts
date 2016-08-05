@@ -6,6 +6,7 @@ import {ShipmentDetailComponent} from '../Components/shipmentDetailComponent';
 import { ShipmentEditComponent } from '../Components/shipmentEditComponent';
 import {SearchControl} from '../HelpControls/SearchControl';
 import { ShipmentService } from "../Services/ShipmentService";
+import { BaseService } from "../Services/BaseService";
 import { SearchViewModel } from "../ViewModels/SearchViewModel";
 import { PagerShipmentsViewModel } from "../ViewModels/PagerShipmentsViewModel";
 import { DateTimeControl } from "../HelpControls/DateTimeControl";
@@ -33,7 +34,6 @@ export class ShipmentsComponent implements OnInit {
     }
 
     constructor(public service: ShipmentService, public search: SearchViewModel) {
-
     }
 
     init() {

@@ -7,8 +7,6 @@ export class UserService extends BaseService
 {
     logIn(name:string,password: string)
     {
-        this.headers = new Headers({ 'Content-Type': 'application/json' });
-        this.options = new RequestOptions({ headers: this.headers });
         return this.http.post("/users/login",JSON.stringify( {name:name,password:password  }),this.options)
         .map(this.ExtractData).catch(this.handleError);
     }
@@ -20,9 +18,17 @@ export class UserService extends BaseService
 
     register(name: string,password: string)
     {
-        this.headers = new Headers({ 'Content-Type': 'application/json' });
-        this.options = new RequestOptions({ headers: this.headers });
         return this.http.post("/users/register",JSON.stringify( {name:name,password:password  }),this.options)
         .map(this.ExtractData).catch(this.handleError);
+    }
+
+    deleteUser(name: string)
+    {
+       return this.http.get( '/users/deleteUser?name=' + name ).map(this.ExtractData).catch(this.handleError);
+    }
+
+    getUsers()
+    {
+        return this.http.get('/users/getAll').map(this.ExtractData).catch(this.handleError);
     }
 }
