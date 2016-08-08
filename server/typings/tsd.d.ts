@@ -5,3 +5,6 @@
 /// <reference path="node/node.d.ts" />
 /// <reference path="serve-static/serve-static.d.ts" />
 /// <reference path="jquery/jquery.d.ts" />
+/// <reference path="cookie-parser/cookie-parser.d.ts" />
+/// <reference path="passport/passport.d.ts" />
+/// <reference path="passport-local/passport-local.d.ts" />

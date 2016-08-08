@@ -13,7 +13,7 @@ export class UserService extends BaseService
 
     logOff()
     {
-         return this.http.get('/users/logoff').map(res => res.json(), this.headers);
+         return this.http.get('/user/logoff').map(res => res.json(), this.headers);
     }
 
     register(name: string,password: string)
@@ -24,11 +24,16 @@ export class UserService extends BaseService
 
     deleteUser(name: string)
     {
-       return this.http.get( '/users/deleteUser?name=' + name ).map(this.ExtractData).catch(this.handleError);
+       return this.http.get( '/user/deleteUser?name=' + name ).map(this.ExtractData).catch(this.handleError);
     }
 
     getUsers()
     {
-        return this.http.get('/users/getAll').map(this.ExtractData).catch(this.handleError);
+        return this.http.get('/user/getAll').map(this.ExtractData).catch(this.handleError);
+    }
+
+    checkIsAuth()
+    {
+        return this.http.get('/user/checkIsAuth').map(this.ExtractData).catch(this.handleError);
     }
 }

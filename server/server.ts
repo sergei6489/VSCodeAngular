@@ -1,10 +1,22 @@
 import express = require('express');
 import path = require('path');
+var cookieParser = require('cookie-parser');  
 var userController = require('./controllers/userController');
 var shipmentsController = require('./controllers/shipmentsController');
 var port: number = process.env.PORT || 3000;
 var app = express();
 var bodyParser = require('body-parser')
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
+
+app.use(cookieParser());  
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({ secret: 'shhsecret' }));  
+app.use(passport.initialize());  
+app.use(passport.session());  
+
 app.use( bodyParser.json() );       
 app.use(bodyParser.urlencoded({    
   extended: true
