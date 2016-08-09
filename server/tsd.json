@@ -22,6 +22,16 @@
     },
     "jquery/jquery.d.ts": {
       "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
+    },
+    "cookie-parser/cookie-parser.d.ts": {
+      "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
+    },
+    "passport/passport.d.ts": {
+      "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
+    },
+    "passport-local/passport-local.d.ts": {
+      "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
     }
+  
   }
 }

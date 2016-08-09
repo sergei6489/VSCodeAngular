@@ -1,5 +1,4 @@
-﻿///<reference path="../typings/tsd.d.ts" />
-import {ROUTER_DIRECTIVES} from "@angular/router";
+﻿import {ROUTER_DIRECTIVES} from "@angular/router";
 import {Component, ViewChild, OnInit} from '@angular/core';
 import { Shipment, Direction } from '../ViewModels/ShipmentViewModel';
 import {ShipmentDetailComponent} from '../Components/shipmentDetailComponent';

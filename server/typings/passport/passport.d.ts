@@ -8,7 +8,6 @@
 declare namespace Express {
     export interface Request {
         authInfo?: any;
-        user?: any;
 
         // These declarations are merged into express's Request type
         login(user: any, done: (err: any) => void): void;
@@ -90,3 +89,4 @@ declare module 'passport' {
         }[];
     }
 }
+

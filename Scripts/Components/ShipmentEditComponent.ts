@@ -1,5 +1,4 @@
-﻿///<reference path="../typings/tsd.d.ts" />
-import {Component, Input} from '@angular/core';
+﻿import {Component, Input} from '@angular/core';
 import { Shipment } from '../ViewModels/ShipmentViewModel';
 import {ElementRef} from '@angular/core';
 
