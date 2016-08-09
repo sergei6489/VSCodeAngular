@@ -5,6 +5,11 @@ import {BaseService} from "./BaseService";
 @Injectable()
 export class UserService extends BaseService
 {
+    public constructor(http: Http)
+    {
+        super(http);
+    }
+
     logIn(name:string,password: string)
     {
         return this.http.post("/users/login",JSON.stringify( {name:name,password:password  }),this.options)

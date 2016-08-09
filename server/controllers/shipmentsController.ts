@@ -22,4 +22,10 @@ router.get("/GetDirectionsTo",(req: express.Request, res: express.Response) =>
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({result: result }));
 });
+router.get("/GetDetails/:id",(req: express.Request, res: express.Response) =>
+{
+    var data = shipmentService.GetShipment(req.params[":id"]);
+    res.setHeader('Content-Header','application/json');
+    res.send(JSON.stringify(data));
+});
 module.exports= router;

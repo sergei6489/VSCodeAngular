@@ -10,7 +10,19 @@ export class UserService implements IUserService
     {
         return null;
     }
-    GetUser( login:string, password: number ): UserViewModel
+    IsExistsUser( login:string, password: string ): boolean
+    {
+        return true;
+    }
+    Register(user: UserViewModel): boolean
+    {
+        return true;
+    }
+    DeleteUser(name: string):boolean
+    {
+        return true;
+    }
+    getAllUser(): Array<UserViewModel>
     {
         return null;
     }

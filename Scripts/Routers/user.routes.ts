@@ -8,11 +8,11 @@ export const UserRoutes: RouterConfig = [
     { 
         path: "users", component: UsersViewComponent,
         children:[
-            { path:"edit/id:", component: UserEditComponent}
+            { path:"edit/id:", component: UserEditComponent},
         ] 
     },
-    {
-        path:"login", component: UserLoginComponent
+    { 
+        path:"login", component: UserLoginComponent 
     },
     {
         path:"register", component: UserEditComponent

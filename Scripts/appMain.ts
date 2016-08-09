@@ -34,7 +34,7 @@ import {UserService} from "./Services/UserService";
                 <span class="fa fa-users"> </span> Shipments </a>
             <a href="#" [hidden]="isAuth || isAdmin" class="list-group-item list-group-item-action">
                 <span class="fa fa-users"> </span> Users </a>
-            <a href="#" [hidden]="isAuth" class="list-group-item list-group-item-action">
+            <a routerLink="/login" [hidden]="isAuth" class="list-group-item list-group-item-action">
                   <span class="fa fa-sign-in fa-3"></span> LOGIN</a>
             <a href="#" [hidden]="isAuth" class="list-group-item list-group-item-action"> 
                 <span class="fa fa-sign-language"></span> SIGN UP</a>

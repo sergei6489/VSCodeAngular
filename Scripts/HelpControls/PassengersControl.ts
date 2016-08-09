@@ -55,7 +55,7 @@ import {Passenger} from "../ViewModels/Passenger";
                                 <div class="form-group clearfix">
                                    <label class="col-md-2">Name:</label>
                                    <div class="col-md-7">
-                                        <input class="form-control " placeholder="Name" [formControl]="namefc" [(ngModel)]="currentPassenger.name" >
+                                        <input class="form-control" placeholder="Name" [formControl]="namefc" [(ngModel)]="currentPassenger.name" >
                                    </div>
                                 </div>
                                 <div class="form-group clearfix">
