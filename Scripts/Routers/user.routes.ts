@@ -15,6 +15,6 @@ export const UserRoutes: RouterConfig = [
         path:"login", component: UserLoginComponent 
     },
     {
-        path:"register", component: UserEditComponent
+        path:"register", component: UserRegisterComponent
     }
 ]

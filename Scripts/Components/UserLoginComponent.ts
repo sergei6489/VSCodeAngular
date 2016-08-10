@@ -14,14 +14,17 @@ import global = require("../globalVariables")
                             <div [className]="namefc.dirty && !namefc.valid ? 'form-group has-danger': 'form-group'">
                                 <label> Name </label>
                                 <input [(ngModel)]="name" formControlName="namefc"
-                                [className]="'form-control form-control-danger'">
+                                class='form-control form-control-danger'>
                                 <div *ngIf="namefc.dirty && !namefc.valid">
                                     <p class="error-text"> Please, write your login </p>
                                 </div>
                             </div>
-                            <div>
+                            <div [className]="passwordfc.dirty && !passwordfc.valid ? 'form-group has-danger':'form-group'">
                                 <label>Password</label>
-                                <input [(ngModel)]="password" formControlName="passwordfc" class="form-control">
+                                <input [(ngModel)]="password" formControlName="passwordfc" class="form-control form-control-danger">
+                                <div *ngIf="passwordfc.dirty && !passwordfc.valid">
+                                    <p class="error-text"> Please, write password </p>
+                                </div>
                             </div>
                     </form>
                     </div>

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers,RequestOptions} from "@angular/http";
 import {BaseService} from "./BaseService";
+import {User} from "../ViewModels/UserViewModel";
 
 @Injectable()
 export class UserService extends BaseService
@@ -21,9 +22,9 @@ export class UserService extends BaseService
          return this.http.get('/user/logoff').map(res => res.json(), this.headers);
     }
 
-    register(name: string,password: string)
+    register(user: User)
     {
-        return this.http.post("/users/register",JSON.stringify( {name:name,password:password  }),this.options)
+        return this.http.post("/users/register",JSON.stringify( user ),this.options)
         .map(this.ExtractData).catch(this.handleError);
     }
 
