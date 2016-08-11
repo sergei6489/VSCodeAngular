@@ -1,11 +1,12 @@
-﻿import {Component} from "@angular/core"
-import {FormBuilder,FormControl,FormGroup,Validators,REACTIVE_FORM_DIRECTIVES,FORM_DIRECTIVES} from "@angular/forms"
+﻿import {Component} from "@angular/core";
+import {FormBuilder,FormControl,FormGroup,Validators,REACTIVE_FORM_DIRECTIVES,FORM_DIRECTIVES} from "@angular/forms";
+import {ROUTER_DIRECTIVES} from "@angular/router"
 import{UserService} from "../Services/UserService" 
 import global = require("../globalVariables")
 
    @Component({
        providers:[UserService],
-       directives:[REACTIVE_FORM_DIRECTIVES,FORM_DIRECTIVES],
+       directives:[REACTIVE_FORM_DIRECTIVES,FORM_DIRECTIVES,ROUTER_DIRECTIVES],
         template:`<div class="offset-md-4 col-md-4" style="margin-top:85px;">
                         <div class="card">
                     <div class="card-header">Authorization</div>
@@ -31,7 +32,7 @@ import global = require("../globalVariables")
                     <div class="card-footer">
                         <div class="pull-md-right">
                             <button class="btn btn-primary" (click)="logIn()">Log in</button>
-                            <button class="btn btn-primary">Register</button>
+                            <a routerLink="/register" class="btn btn-primary">Register</a>
                         </div>
                     </div>
                 </div></div>`
