@@ -1,11 +1,8 @@
-﻿///<reference path="./typings/tsd.d.ts" />
-import {Component,OnInit} from "@angular/core";
-import {ROUTER_DIRECTIVES} from "@angular/router";
+﻿import {Component,OnInit} from "@angular/core";
 import {UserService} from "./Services/UserService";
 
 @Component({
     selector: "myApp",
-    providers:[UserService],
     template: ` <nav class="navbar navbar-dark bg-primary navbar-fixed-top">
         <div class="container">
             <button  class="navbar-brand navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar-wrapper">☰</button>
@@ -43,8 +40,7 @@ import {UserService} from "./Services/UserService";
      </div>
     <div class="container-fluid" style="margin-top:60px;">
         <router-outlet></router-outlet>
-    </div>`,
-    directives: [ROUTER_DIRECTIVES]
+    </div>`
 })
 
 export class appMain implements OnInit {

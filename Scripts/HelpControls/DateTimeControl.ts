@@ -1,4 +1,5 @@
-﻿import {Component, ElementRef, ViewChild, Input, Output, EventEmitter, AfterViewInit } from '@angular/core'
+﻿import {Component, ElementRef, ViewChild, Input, Output, EventEmitter, AfterViewInit,forwardRef,OnChanges } from '@angular/core'
+import {NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor} from "@angular/forms";
 import {Http} from "@angular/http"
 
 @Component({
@@ -9,14 +10,18 @@ import {Http} from "@angular/http"
                     <button (click)="clear()" class="btn btn-secondary"><i class="fa fa-times fa-2" aria-hidden="true"></i></button>
                     <button (click)="openDatePicker()" class="btn btn-primary"><span class="fa fa-calendar"></span></button>
                 </div>
-               </div>`
+               </div>`,
+    providers: [
+        { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateTimeControl), multi: true },
+        { provide: NG_VALIDATORS, useExisting: forwardRef(() => DateTimeControl), multi: true }
+    ]           
 
 })
 
-export class DateTimeControl implements AfterViewInit {
-    @Input() value: Date;
-    @Output() valueChange: EventEmitter<Date> = new EventEmitter<Date>();
+export class DateTimeControl implements AfterViewInit, ControlValueAccessor, OnChanges {
+    value: Date;
     @ViewChild('dateControl') dateControl: ElementRef;
+    propagateChange:any = () => {};
 
     ngAfterViewInit() {
         let picker = jQuery(this.dateControl.nativeElement);
@@ -37,10 +42,28 @@ export class DateTimeControl implements AfterViewInit {
 
     changed(value) {
         this.value = new Date(value);
-        this.valueChange.emit(value);
     }
 
     clear() {
         this.changed(null);
     }
+
+    writeValue(obj: any)
+    {
+         if (obj)
+         {
+             this.value = obj;
+         }
+    }
+    registerOnChange(fn: any)
+    {
+        this.propagateChange = fn;
+    }
+    registerOnTouched(fn: any)
+    {
+    }
+    ngOnChanges(inputs)
+    {
+    }
 }
+

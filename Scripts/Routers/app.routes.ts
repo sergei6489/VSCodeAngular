@@ -1,11 +1,25 @@
-﻿import { provideRouter, RouterConfig }  from '@angular/router';
+﻿import { RouterModule, Routes }  from '@angular/router';
+import {UsersViewComponent } from "../Components/UsersViewComponent";
+import {UserEditComponent} from "../Components/UserEditComponent";
+import {UserRegisterComponent} from "../Components/UserRegisterComponent";
+import {UserLoginComponent} from "../Components/UserLoginComponent";
+import {ShipmentsComponent} from "../Components/ShipmentsComponent";
+import {TicketComponent } from "../Components/TicketComponent";
 
-import { ShipmentsRouters } from './shipments.routes';
-import { UserRoutes }       from './user.routes';
-
-export const routes: RouterConfig = [
-    ...ShipmentsRouters,
-    ...UserRoutes
+export const routes: Routes = [
+    { path: '', component: ShipmentsComponent },
+    { path: 'ticketBuy', component: TicketComponent },
+    { path: "users", component: UsersViewComponent,
+        children:[
+            { path:"edit/id:", component: UserEditComponent},
+        ] 
+    },
+    { 
+        path:"login", component: UserLoginComponent 
+    },
+    {
+        path:"register", component: UserRegisterComponent
+    }
 ];
 
-export const APP_ROUTER_PROVIDERS = [provideRouter(routes)];
+export const APP_ROUTER_PROVIDERS = RouterModule.forRoot(routes);

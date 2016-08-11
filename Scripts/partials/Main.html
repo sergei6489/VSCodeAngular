@@ -9,7 +9,6 @@
         <div class="card-block">
             <div class="form-horizontal">
                 <div class="form-group">
-                    <md-checkbox [checked]="isRoundTrip" label="RoundTrip:"></md-checkbox>
                 </div>
                 <div class="form-group clearfix">   
                     <comboBoxTemplate [url]="'/Shipments/GetDirectionsFrom'" [text]="'From'" [(value)]="search.from"></comboBoxTemplate>
@@ -18,11 +17,11 @@
                 <div class="form-group clearfix">
                     <label class="col-md-2">Departure date:</label>
                     <div class="col-md-4">
-                        <DateTimePicker [(value)]="search.departureDate" ></DateTimePicker>
+                        <DateTimePicker [(ngModel)]="search.departureDate" ></DateTimePicker>
                     </div>
                     <label class="col-md-2">Return date:</label>
                     <div class="col-md-4">
-                        <DateTimePicker  [(value)]="search.returnDate" ></DateTimePicker>
+                        <DateTimePicker  [(ngModel)]="search.returnDate" ></DateTimePicker>
                     </div>
                 </div>
                 <div class="form-group clearfix">
@@ -47,8 +46,7 @@
     </div>
     <div class="row">
         <div class="offset-md-5" [hidden]="!isLoad">
-            <md-progress-circle mode="indeterminate">
-            </md-progress-circle>
+
         </div>
         <div class="offset-sm-1 offset-md-1 col-md-9 col-sm-9" style="padding-left:15px">
             <div class="card" *ngFor="#shipment of shipments">

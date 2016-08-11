@@ -5,14 +5,6 @@ import { ElementRef } from '@angular/core';
 @Component({
     selector: "shipment-detail",
     templateUrl: "client/views/shipment-details.html",
-    styles: [`
-        .sidebar{
-            position:fixed;
-            bottom:0;
-            top:50px;
-            background-color:aliceblue;
-        }
-`]
 })
 export class ShipmentDetailComponent {
     shipment = new Shipment(1, "Barcelona", "Moscow", new Date(), new Date(), [], 4555)

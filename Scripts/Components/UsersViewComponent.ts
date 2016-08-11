@@ -4,33 +4,7 @@ import {User} from "../ViewModels/UserViewModel";
 import {ROUTER_DIRECTIVES} from "@angular/router"
 
 @Component({
-    providers:[UserService],
-    directives:[ROUTER_DIRECTIVES],
     template:`
-        <div class="card" #ngFor="let user of users">
-            <div class="card-block">
-            </div>
-        </div>
-        <table>
-         <thead>
-            <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
-            </tr>
-         </thead>
-        <tbody>
-            <tr *ngFor="let user of users">
-                <td>{{user.name}}</td>
-                <td>{{user.password}}</td>
-                <td>
-                    <button class="btn btn-primary" (click)='deleteUser(user)'>Remove</button>
-                    <a [routerLink]="['/Users/edit/{{user.name}}']" class="btn btn-primary" routerLinkActive="active">Edit</a>
-                </td>
-            </tr>
-        </tbody
-        </table>
     `
 })
 

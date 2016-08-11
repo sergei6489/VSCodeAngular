@@ -5,8 +5,6 @@ import{UserService} from "../Services/UserService"
 import global = require("../globalVariables")
 
    @Component({
-       providers:[UserService],
-       directives:[REACTIVE_FORM_DIRECTIVES,FORM_DIRECTIVES,ROUTER_DIRECTIVES],
         template:`<div class="offset-md-4 col-md-4" style="margin-top:85px;">
                         <div class="card">
                     <div class="card-header">Authorization</div>

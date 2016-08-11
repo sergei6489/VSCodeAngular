@@ -6,8 +6,6 @@ import {User} from "../ViewModels/UserViewModel";
 import {DateTimeControl} from "../HelpControls/DateTimeControl"
 
 @Component({
-        providers:[UserService],
-        directives:[DateTimeControl,REACTIVE_FORM_DIRECTIVES,ROUTER_DIRECTIVES],
         template:`<div class="offset-md-4 col-md-4">
                     <div class="card">
                         <div class="card-header">Registration</div>
@@ -36,11 +34,11 @@ import {DateTimeControl} from "../HelpControls/DateTimeControl"
                                 </div>
                                 <div class="form-group">
                                     <label>Birthday</label>
-                                    <DateTimePicker [(value)]="newUser.bithday" > </DateTimePicker>
+                                    <DateTimePicker [(ngModel)]="newUser.bithday" formControlName="bithdayfc" > </DateTimePicker>
                                 </div>
                                 <div class="form-group">
                                     <label>IsMale</label>
-                                    <input type="checkbox"  [(ngModel)]="newUser.isMale" formControlName="isMalefc">
+                                    <input type="checkbox" style="display:block"  [(ngModel)]="newUser.isMale" formControlName="isMalefc">
                                 </div>
                             </form>
                         </div>

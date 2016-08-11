@@ -1,9 +1,4 @@
-﻿import { bootstrap }    from '@angular/platform-browser-dynamic';
-import {HTTP_PROVIDERS} from '@angular/http';
-import { appMain } from './appMain';
-import {APP_ROUTER_PROVIDERS} from './Routers/app.routes';
-import {LocationStrategy, Location, HashLocationStrategy } from '@angular/common';
-import {provideForms, disableDeprecatedForms} from '@angular/forms';
+﻿import {AppModule} from './mainModule'
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-
-bootstrap(appMain, [HTTP_PROVIDERS, APP_ROUTER_PROVIDERS,provideForms(),disableDeprecatedForms()]);
+platformBrowserDynamic().bootstrapModule(AppModule);
