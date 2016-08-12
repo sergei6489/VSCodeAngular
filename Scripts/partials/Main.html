@@ -24,21 +24,27 @@
                         <DateTimePicker  [(ngModel)]="search.returnDate" formControlName="returnDatefc" ></DateTimePicker>
                     </div>
                 </div>
-                <div class="form-group clearfix">
+                <div class="form-group clearfix" class="form-group">
                     <label class="col-md-2">Highest price:</label>
                     <div class="col-md-2">
-                      <div class="input-group">
-                        <input class="form-control" [(ngModel)]="search.highestPrice" formControlName="highestPricefc"  required pattern="[0-9]+" />
+                      <div  [className]="myGroup.controls['highestPricefc'].dirty && !myGroup.controls['highestPricefc'].valid ? 'input-group has-danger': 'input-group'">
+                        <input class="form-control form-control-danger" [(ngModel)]="search.highestPrice" formControlName="highestPricefc" />
                         <span class="input-group-addon">$</span>                         
                       </div>
+                        <div *ngIf="myGroup.controls['highestPricefc'].dirty && !myGroup.controls['highestPricefc'].valid">
+                            <p class="error-text"> Please, write min price </p>
+                        </div>
                     </div>
                     <label class="col-md-2">Smallest price:</label>
                     <div class="col-md-2">
-                            <div class="input-group">
-                                <input class="form-control" [(ngModel)]="search.smallestPrice" formControlName="smallestPricefc" />
-                                <span class="input-group-addon">$</span>
-                            </div>
-                 </div>
+                        <div  [className]="myGroup.controls['smallestPricefc'].dirty && !myGroup.controls['smallestPricefc'].valid ? 'input-group has-danger' : 'input-group'">
+                            <input class="form-control form-control-danger" [(ngModel)]="search.smallestPrice" formControlName="smallestPricefc" />
+                            <span class="input-group-addon">$</span>
+                        </div>
+                        <div *ngIf="myGroup.controls['smallestPricefc'].dirty && !myGroup.controls['smallestPricefc'].valid">
+                            <p class="error-text"> Please, write max price </p>
+                        </div>
+                    </div>
                 </div>
                 <button type="button"  class="btn btn-primary pull-xs-right" (click)="Search()">Search</button>
             </form>

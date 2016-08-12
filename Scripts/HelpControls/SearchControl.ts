@@ -81,9 +81,4 @@ export class SearchControl implements ControlValueAccessor, OnChanges {
     {
 
     }
-
-    validate(c: FormControl)
-    {
-        return true;
-    }
 }

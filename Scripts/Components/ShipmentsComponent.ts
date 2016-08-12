@@ -35,12 +35,12 @@ export class ShipmentsComponent implements OnInit {
 
     constructor(public service: ShipmentService, public search: SearchViewModel,fb: FormBuilder) {
         this.myGroup = fb.group({
-            "smallestPricefc": new FormControl('', Validators.required),
-            "highestPricefc": new FormControl('',Validators.required),
-            "fromfc": new FormControl('',Validators.required),
-            "tofc": new FormControl('',Validators.required),
-            "departureDatefc": this.test,
-            "returnDatefc": new FormControl('', Validators.required)
+            "smallestPricefc": new FormControl('', Validators.minLength(100)),
+            "highestPricefc": new FormControl('',Validators.minLength(100)),
+            "fromfc": new FormControl(''),
+            "tofc": new FormControl(''),
+            "departureDatefc": new FormControl(''),
+            "returnDatefc": new FormControl('')
         });
     }
 
@@ -58,20 +58,26 @@ export class ShipmentsComponent implements OnInit {
     }
 
     Search() {
-        this.shipments = [];
-        this.isLoad = true;
-        var self = this;
-        setTimeout(function () {
-            self.service.getShipments(self.search).
-                subscribe(res => {
-                    res.result.forEach((data: Shipment) => {
-                        self.shipments.push(new Shipment(data.id, data.from, data.to, new Date(data.dateTimeOut), new Date(data.dateTimeInput), data.places, data.price));
-                    });
-                    self.search.pageCount = res.PageCount;
-                    self.isLoad = false;
-                }, error => { self.errorText = error; self.isLoad = false; });
-        },2000);
-
+        if (this.myGroup.valid)
+        {
+            this.shipments = [];
+            this.isLoad = true;
+            var self = this;
+            setTimeout(function () {
+                self.service.getShipments(self.search).
+                    subscribe(res => {
+                        res.result.forEach((data: Shipment) => {
+                            self.shipments.push(new Shipment(data.id, data.from, data.to, new Date(data.dateTimeOut), new Date(data.dateTimeInput), data.places, data.price));
+                        });
+                        self.search.pageCount = res.PageCount;
+                        self.isLoad = false;
+                    }, error => { self.errorText = error; self.isLoad = false; });
+            },2000);
+        }
+        else{
+            this.myGroup.controls["smallestPricefc"].markAsDirty();
+            this.myGroup.controls["highestPricefc"].markAsDirty();
+        }
     }
 
     previewPage() {

@@ -6,18 +6,17 @@ import {Http} from "@angular/http"
     selector: 'DateTimePicker',
     template: `<div class="input-group">
                  <input type="text" class="form-control" #dateControl [(ngModel)]='value'/>
-                <div class="input-group-btn hidden-sm-down">
-                    <button (click)="clear()" class="btn btn-secondary"><i class="fa fa-times fa-2" aria-hidden="true"></i></button>
-                    <button (click)="openDatePicker()" class="btn btn-primary"><span class="fa fa-calendar"></span></button>
-                </div>
+                    <div class="input-group-btn hidden-sm-down">
+                        <button (click)="clear()" class="btn btn-secondary"><i class="fa fa-times fa-2" aria-hidden="true"></i></button>
+                        <button (click)="openDatePicker()" class="btn btn-primary"><span class="fa fa-calendar"></span></button>
+                    </div>
                </div>`,
     providers: [
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateTimeControl), multi: true },
-        { provide: NG_VALIDATORS, useExisting: forwardRef(() => DateTimeControl), multi: true }
     ]           
 })
 
-export class DateTimeControl implements AfterViewInit, ControlValueAccessor, Validator, OnChanges {
+export class DateTimeControl implements AfterViewInit, ControlValueAccessor, OnChanges {
     value: Date;
     @ViewChild('dateControl') dateControl: ElementRef;
     propagateChange:any = () => {};
@@ -60,9 +59,6 @@ export class DateTimeControl implements AfterViewInit, ControlValueAccessor, Val
     }
     ngOnChanges(inputs)
     {
-    }
-    validate(c: FormControl):any {
-        return true;
     }
 }
 
