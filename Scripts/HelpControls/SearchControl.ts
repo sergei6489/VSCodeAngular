@@ -1,5 +1,7 @@
-﻿import {Component, ElementRef, ViewChild, Input, Output, EventEmitter } from '@angular/core'
-import {Http} from "@angular/http"
+﻿import {Component, ElementRef, ViewChild, Input, Output, EventEmitter, OnChanges,forwardRef } from '@angular/core'
+import {Http} from "@angular/http";
+import {ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, FormControl} from "@angular/forms";
+
 @Component({
     selector: 'comboBoxTemplate',
     template:`<label class="col-md-2">{{text}}:</label>
@@ -13,16 +15,20 @@ import {Http} from "@angular/http"
                             </ul>
                         </div>
                     </div>
-                    </div>`
+                    </div>`,
+    providers:[
+        { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(()=>SearchControl), multi:true }
+    ]
 })
-export class SearchControl {
+export class SearchControl implements ControlValueAccessor, OnChanges {
     @Input() text: string;
-    @Input() value: string;
+    value: string;
     @Input() url: string;
-    @Output() valueChange: EventEmitter<String> = new EventEmitter<String>();
     public directions: Array<string> = [];
     @ViewChild('menuRef') menuRef: ElementRef;
 
+
+    propagateChange:any = () =>{};
     public constructor(public http: Http) {
     }
 
@@ -41,15 +47,43 @@ export class SearchControl {
     selectItem(event) {
         var target = event.target || event.srcElement || event.currentTarget;
         this.value = target.innerText;
-        this.valueChange.emit(this.value);
+        this.propagateChange(this.value);
     }
 
     Changed(value) {
-        this.valueChange.emit(value);
+        this.propagateChange(value);
         this.getData(value);
     }
 
     click() {
         this.getData(this.value);
+    }
+
+    writeValue(obj: any)
+    {
+        if (obj !== this.value)
+        {
+            this.value = obj;
+        }
+    }
+
+    registerOnChange(fn: any)
+    {
+        this.propagateChange = fn;
+    }
+
+    registerOnTouched(fn: any)
+    {
+
+    }
+
+    ngOnChanges(inputs)
+    {
+
+    }
+
+    validate(c: FormControl)
+    {
+        return true;
     }
 }

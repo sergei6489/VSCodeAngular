@@ -13,6 +13,7 @@ import { MdButton } from "@angular2-material/button"
 import { MD_PROGRESS_CIRCLE_DIRECTIVES} from "@angular2-material/progress-circle";
 import { MD_CHECKBOX_DIRECTIVES } from "@angular2-material/checkbox";
 import {MD_CARD_DIRECTIVES} from "@angular2-material/card";
+import {FormGroup,FormControl,FormBuilder,Validators} from "@angular/forms";
 
 @Component({
     selector: "testProject",
@@ -25,12 +26,22 @@ export class ShipmentsComponent implements OnInit {
     shipments: Array<Shipment> = [];
     errorText: string;
     isLoad: boolean;
+    myGroup: FormGroup;
+    test = new FormControl('', Validators.required);
 
     ngOnInit() {
         this.init();
     }
 
-    constructor(public service: ShipmentService, public search: SearchViewModel) {
+    constructor(public service: ShipmentService, public search: SearchViewModel,fb: FormBuilder) {
+        this.myGroup = fb.group({
+            "smallestPricefc": new FormControl('', Validators.required),
+            "highestPricefc": new FormControl('',Validators.required),
+            "fromfc": new FormControl('',Validators.required),
+            "tofc": new FormControl('',Validators.required),
+            "departureDatefc": this.test,
+            "returnDatefc": new FormControl('', Validators.required)
+        });
     }
 
     init() {

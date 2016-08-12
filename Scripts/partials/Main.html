@@ -7,41 +7,41 @@
     <div class="card">
             <h3 class="card-header">Searching</h3>
         <div class="card-block">
-            <div class="form-horizontal">
+            <form [formGroup]="myGroup" class="form-horizontal">
                 <div class="form-group">
                 </div>
                 <div class="form-group clearfix">   
-                    <comboBoxTemplate [url]="'/Shipments/GetDirectionsFrom'" [text]="'From'" [(value)]="search.from"></comboBoxTemplate>
-                    <comboBoxTemplate [url]="'/Shipments/GetDirectionsTo'" [text]="'To'" [(value)]="search.to"></comboBoxTemplate>
+                    <comboBoxTemplate [url]="'/Shipments/GetDirectionsFrom'" [text]="'From'" [(ngModel)]="search.from" formControlName="fromfc"></comboBoxTemplate>
+                    <comboBoxTemplate [url]="'/Shipments/GetDirectionsTo'" [text]="'To'" [(ngModel)]="search.to" formControlName="tofc"></comboBoxTemplate>
                 </div>
                 <div class="form-group clearfix">
                     <label class="col-md-2">Departure date:</label>
                     <div class="col-md-4">
-                        <DateTimePicker [(ngModel)]="search.departureDate" ></DateTimePicker>
+                        <DateTimePicker [(ngModel)]="search.departureDate" formControlName="departureDatefc" ></DateTimePicker>
                     </div>
                     <label class="col-md-2">Return date:</label>
                     <div class="col-md-4">
-                        <DateTimePicker  [(ngModel)]="search.returnDate" ></DateTimePicker>
+                        <DateTimePicker  [(ngModel)]="search.returnDate" formControlName="returnDatefc" ></DateTimePicker>
                     </div>
                 </div>
                 <div class="form-group clearfix">
                     <label class="col-md-2">Highest price:</label>
                     <div class="col-md-2">
                       <div class="input-group">
-                        <input class="form-control" [(ngModel)]="search.highestPrice" required pattern="[0-9]+" />
+                        <input class="form-control" [(ngModel)]="search.highestPrice" formControlName="highestPricefc"  required pattern="[0-9]+" />
                         <span class="input-group-addon">$</span>                         
                       </div>
                     </div>
                     <label class="col-md-2">Smallest price:</label>
                     <div class="col-md-2">
                             <div class="input-group">
-                                <input class="form-control" [(ngModel)]="search.smallestPrice" />
+                                <input class="form-control" [(ngModel)]="search.smallestPrice" formControlName="smallestPricefc" />
                                 <span class="input-group-addon">$</span>
                             </div>
                  </div>
                 </div>
                 <button type="button"  class="btn btn-primary pull-xs-right" (click)="Search()">Search</button>
-            </div>
+            </form>
         </div>
     </div>
     <div class="row">

@@ -1,5 +1,5 @@
 ﻿import {Component, ElementRef, ViewChild, Input, Output, EventEmitter, AfterViewInit,forwardRef,OnChanges } from '@angular/core'
-import {NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor} from "@angular/forms";
+import {NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, FormControl, Validator} from "@angular/forms";
 import {Http} from "@angular/http"
 
 @Component({
@@ -15,10 +15,9 @@ import {Http} from "@angular/http"
         { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => DateTimeControl), multi: true },
         { provide: NG_VALIDATORS, useExisting: forwardRef(() => DateTimeControl), multi: true }
     ]           
-
 })
 
-export class DateTimeControl implements AfterViewInit, ControlValueAccessor, OnChanges {
+export class DateTimeControl implements AfterViewInit, ControlValueAccessor, Validator, OnChanges {
     value: Date;
     @ViewChild('dateControl') dateControl: ElementRef;
     propagateChange:any = () => {};
@@ -29,7 +28,7 @@ export class DateTimeControl implements AfterViewInit, ControlValueAccessor, OnC
         picker.datepicker({
             dateFormat: "dd.mm.yy",
             onSelect: function (textDate) {
-                self.changed(this.value);
+                self.propagateChange(textDate);
             }
         });
         if (this.value != null)
@@ -40,12 +39,9 @@ export class DateTimeControl implements AfterViewInit, ControlValueAccessor, OnC
         jQuery(this.dateControl.nativeElement).datepicker("show");
     }
 
-    changed(value) {
-        this.value = new Date(value);
-    }
-
     clear() {
-        this.changed(null);
+        this.value = null;
+        this.propagateChange(this.value);
     }
 
     writeValue(obj: any)
@@ -64,6 +60,9 @@ export class DateTimeControl implements AfterViewInit, ControlValueAccessor, OnC
     }
     ngOnChanges(inputs)
     {
+    }
+    validate(c: FormControl):any {
+        return true;
     }
 }
 
