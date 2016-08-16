@@ -42,4 +42,9 @@ export class UserService extends BaseService
     {
         return this.http.get('/user/checkIsAuth').map(this.ExtractData).catch(this.handleError);
     }
+
+    checkIsLoginExists(login: string)
+    {
+        return this.http.get('/user/checkIsLoginExists?login='+login).map(this.ExtractData).catch(this.handleError);
+    }
 }

@@ -3,7 +3,10 @@ import {FORM_DIRECTIVES,FormControl,FormBuilder,FormGroup,REACTIVE_FORM_DIRECTIV
 import {ROUTER_DIRECTIVES} from "@angular/router";
 import {UserService} from "../Services/UserService";
 import {User} from "../ViewModels/UserViewModel";
-import {DateTimeControl} from "../HelpControls/DateTimeControl"
+import {DateTimeControl} from "../HelpControls/DateTimeControl";
+import {ValidationsMessagesControl} from "../HelpControls/ValidationMessagesControl";
+import {ValidationService} from "../Services/ValidationService";
+import {UserLoginValidator} from "../HelpControls/UserLoginValidator"
 
 @Component({
         template:`<div class="offset-md-4 col-md-4">
@@ -11,30 +14,25 @@ import {DateTimeControl} from "../HelpControls/DateTimeControl"
                         <div class="card-header">Registration</div>
                         <div class="card-block">
                             <form [formGroup]="form" class="form-horizontal">
-                                <div class="form-group">
+                                <div class="form-group" [class.has-danger]="namefc.dirty && !namefc.valid">
                                 <label>Name</label>
                                     <input [(ngModel)]="newUser.name" formControlName="namefc" class="form-control form-control-danger" >
-                                        <div *ngIf="namefc.dirty && namefc.valid">
-                                            <p class="error-text">Please, input name</p>
-                                        </div>
+                                        <validationMessage [control]="namefc"></validationMessage>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" [class.has-danger]="passwordfc.dirty && !passwordfc.valid">
                                 <label>Password</label>
                                     <input [(ngModel)]="newUser.password" formControlName="passwordfc" class="form-control form-control-danger" >
-                                        <div *ngIf="namefc.dirty && passwordfc.valid">
-                                            <p class="error-text">Please, input password</p>
-                                        </div>
+                                        <validationMessage [control]="passwordfc"></validationMessage>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" [class.has-danger]="emailfc.dirty && !emailfc.valid">
                                     <label>Email</label>
                                     <input [(ngModel)]="newUser.email" formControlName="emailfc" class="form-control form-control-danger" >
-                                        <div *ngIf="namefc.dirty && emailfc.valid">
-                                            <p class="error-text">Please, input email</p>
-                                        </div>
+                                        <validationMessage [control]="emailfc"></validationMessage>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" [class.has-danger]="bithdayfc.dirty && !bithdayfc.valid">
                                     <label>Birthday</label>
-                                    <DateTimePicker [(ngModel)]="newUser.bithday" formControlName="bithdayfc" > </DateTimePicker>
+                                    <DateTimePicker [(ngModel)]="newUser.bithday" formControlName="bithdayfc"> </DateTimePicker>
+                                    <validationMessage [control]="bithdayfc"></validationMessage>
                                 </div>
                                 <div class="form-group">
                                     <label>IsMale</label>
@@ -44,8 +42,8 @@ import {DateTimeControl} from "../HelpControls/DateTimeControl"
                         </div>
                         <div class="card-footer">
                                <div class="pull-md-right">
-                                    <button class="btn btn-primary" (click)="register()">Register</button>
-                                    <a routerLink="/login" class="btn btn-primary">Log in</a>
+                                    <button class="btn btn-outline-primary" (click)="register()">Register</button>
+                                    <a routerLink="/login" class="btn btn-outline-primary">Log in</a>
                                 </div>
                         </div>
                     </div>
@@ -56,13 +54,13 @@ export class UserRegisterComponent {
     newUser = new User();
 
     form : FormGroup;
-    namefc = new  FormControl('', Validators.required);
-    passwordfc = new  FormControl('', Validators.required);
-    emailfc = new  FormControl('', Validators.required);
+    namefc = new  FormControl('',Validators.compose([Validators.required,this.validationService.userLoginValidator.bind(this.validationService)]) );
+    passwordfc = new  FormControl('', Validators.compose([Validators.required,this.validationService.passwordValidator]));
+    emailfc = new  FormControl('', Validators.compose([Validators.required,this.validationService.emailValidator]));
     bithdayfc = new  FormControl('', Validators.required);
-    isMalefc = new FormControl('',Validators.required);
+    isMalefc = new FormControl('');
 
-    public constructor (fb:FormBuilder,private service: UserService){
+    public constructor (fb:FormBuilder,private service: UserService,public validationService: ValidationService ){
         this.newUser.bithday = new Date();
         this.form = fb.group({
             "namefc" : this.namefc,

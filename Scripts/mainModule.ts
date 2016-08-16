@@ -1,4 +1,5 @@
 import { bootstrap }    from '@angular/platform-browser-dynamic';
+import {} from "@angular/forms";
 import {HTTP_PROVIDERS} from '@angular/http';
 import { appMain } from './appMain';
 import {APP_ROUTER_PROVIDERS} from './Routers/app.routes';
@@ -14,7 +15,9 @@ import {SearchViewModel} from './ViewModels/SearchViewModel'
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {SearchControl} from './HelpControls/SearchControl';
 import {DateTimeControl} from './HelpControls/DateTimeControl';
-import {PassengersControl} from './HelpControls/PassengersControl'
+import {PassengersControl} from './HelpControls/PassengersControl';
+import {ValidationsMessagesControl} from './HelpControls/ValidationMessagesControl';
+import {ValidationService} from './Services/ValidationService'
 
 @NgModule({
   imports: [
@@ -29,13 +32,20 @@ import {PassengersControl} from './HelpControls/PassengersControl'
     ShipmentsComponent,
     DateTimeControl,
     SearchControl,
-    PassengersControl
+    PassengersControl,
+    ValidationsMessagesControl
   ],
   providers: [
-    HTTP_PROVIDERS,
+      HTTP_PROVIDERS,
       UserService,
       ShipmentService,
-      SearchViewModel
+      ValidationService,
+      SearchViewModel,
+      {
+        provide: 'NameValidator',
+        useFactory: (control:Control) => (userAccountService:UserService) => validatePassword(userAccountService),
+        deps: [UserService]
+      }
   ],
   bootstrap: [ appMain ]
 })

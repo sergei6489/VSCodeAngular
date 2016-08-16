@@ -1,31 +1,26 @@
  .ui-datepicker{z-index:1151 !important;}
-        .sidebar {
-            display: none;
-        }
-
-        .label-Price {
-            display: none;
-        }
-
         .ng-invalid {
            
         }
 
-        #sidebar-wrapper {
+        #sidebar-wrapper1 {
             z-index: 1000;
             position: fixed;
             top:50px;
             width:300px;
             height: 100%;
             overflow-y: auto;
-            background: #0275d8;
+            margin-left:-300px;
+            background: #eceeef;
             -webkit-transition: all 0.5s ease;
             -moz-transition: all 0.5s ease;
             -o-transition: all 0.5s ease;
             transition: all 0.5s ease;
+            box-shadow:0px 2px 5px 0 rgba(0, 0, 0, 0.26);
         }
 
-        .error-text{
-            font-size: 11px;
-            color: red;
+        #sidebar-wrapper1.active
+        {
+            margin-left:0px;
         }
+    

@@ -34,5 +34,12 @@ router.get('/getAll',function(req: express.Request, res: express.Response){
 router.post('/register',function(req: express.Request, res: express.Response){
     var success =  service.Register(req.body);
     
-})
+});
+
+router.get('/checkIsLoginExists/:login',function(req: express.Request, res: express.Response)
+{
+   res.setHeader('Content-Type','application/json');
+   res.send(JSON.stringify(true));
+});
+
 module.exports = router;

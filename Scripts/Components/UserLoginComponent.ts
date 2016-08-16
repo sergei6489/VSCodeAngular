@@ -1,39 +1,35 @@
 ﻿import {Component} from "@angular/core";
 import {FormBuilder,FormControl,FormGroup,Validators,REACTIVE_FORM_DIRECTIVES,FORM_DIRECTIVES} from "@angular/forms";
 import {ROUTER_DIRECTIVES} from "@angular/router"
-import{UserService} from "../Services/UserService" 
+import {UserService} from "../Services/UserService" 
 import global = require("../globalVariables")
+import {ValidationsMessagesControl} from "../HelpControls/ValidationMessagesControl"
 
    @Component({
         template:`<div class="offset-md-4 col-md-4" style="margin-top:85px;">
-                        <div class="card">
+                    <form [formGroup]="form" class="form-horizontal" (submit)="logIn()">
+                    <div class="card">
                     <div class="card-header">Authorization</div>
                     <div class="card-block">
-                    <form [formGroup]="form" class="form-horizontal">
-                            <div [className]="namefc.dirty && !namefc.valid ? 'form-group has-danger': 'form-group'">
+                            <div class="form-group" [class.has-danger]="namefc.dirty && !namefc.valid">
                                 <label> Name </label>
                                 <input [(ngModel)]="name" formControlName="namefc"
                                 class='form-control form-control-danger'>
-                                <div *ngIf="namefc.dirty && !namefc.valid">
-                                    <p class="error-text"> Please, write your login </p>
-                                </div>
+                                <validationMessage [control]="form.controls.namefc"></validationMessage>
                             </div>
-                            <div [className]="passwordfc.dirty && !passwordfc.valid ? 'form-group has-danger':'form-group'">
+                            <div class="form-group" [class.has-danger]="passwordfc.dirty && !passwordfc.valid">
                                 <label>Password</label>
                                 <input [(ngModel)]="password" formControlName="passwordfc" class="form-control form-control-danger">
-                                <div *ngIf="passwordfc.dirty && !passwordfc.valid">
-                                    <p class="error-text"> Please, write password </p>
-                                </div>
+                                <validationMessage [control]="form.controls.passwordfc"></validationMessage>
                             </div>
-                    </form>
                     </div>
                     <div class="card-footer">
                         <div class="pull-md-right">
-                            <button class="btn btn-primary" (click)="logIn()">Log in</button>
-                            <a routerLink="/register" class="btn btn-primary">Register</a>
+                            <button class="btn btn-outline-success" type="submit">Log in</button>
+                            <a routerLink="/register" class="btn btn-outline-primary">Register</a>
                         </div>
                     </div>
-                </div></div>`
+                </div> </form></div>`
     })
 export class UserLoginComponent {
     public name: string;

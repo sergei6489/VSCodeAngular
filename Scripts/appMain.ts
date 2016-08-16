@@ -4,8 +4,8 @@ import {UserService} from "./Services/UserService";
 @Component({
     selector: "myApp",
     template: ` <nav class="navbar navbar-dark bg-primary navbar-fixed-top">
-        <div class="container">
-            <button  class="navbar-brand navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar-wrapper">☰</button>
+        <div class="container-fluid">
+            <button (click)="showMenu()" class="navbar-brand navbar-toggler" type="button" data-toggle="collapse" data-target="#sidebar-wrapper">☰</button>
             <a class="navbar-brand" href="#">Shipments</a>
             <ul class="nav navbar-nav pull-xs-right hidden-xs-up">
                 <li class="nav-item">
@@ -25,16 +25,16 @@ import {UserService} from "./Services/UserService";
             </ul>
          </div>
     </nav>
-     <div id="sidebar-wrapper" class="collapse hidden-xs-">
+     <div id="sidebar-wrapper1" class="hidden-md-down" [class.active]="menuActive==true">
         <div class="list-group">
-        <a href="#" [hidden]="isAuth || isAdmin" class="list-group-item list-group-item-action">
+        <a href="#" [hidden]="!isAuth || !isAdmin" class="list-group-item list-group-item-action">
                 <span class="fa fa-users"> </span> Shipments </a>
-            <a href="#" [hidden]="isAuth || isAdmin" class="list-group-item list-group-item-action">
+            <a href="#" [hidden]="!isAuth || !isAdmin" class="list-group-item list-group-item-action">
                 <span class="fa fa-users"> </span> Users </a>
             <a routerLink="/login" [hidden]="isAuth" class="list-group-item list-group-item-action">
-                  <span class="fa fa-sign-in fa-3"></span> LOGIN</a>
-            <a href="#" [hidden]="isAuth" class="list-group-item list-group-item-action"> 
-                <span class="fa fa-sign-language"></span> SIGN UP</a>
+                  <span class="fa fa-sign-in fa-3"></span> Login</a>
+            <a routerLink="/register" [hidden]="isAuth" class="list-group-item list-group-item-action"> 
+                <span class="fa fa-sign-language"></span> Register</a>
             <a href="#" [hidden]="!isAuth" class="list-group-item list-group-item-action">LogOff</a>
         </div>
      </div>
@@ -46,6 +46,7 @@ import {UserService} from "./Services/UserService";
 export class appMain implements OnInit {
     public isAuth:boolean;
     public isAdmin: boolean;
+    public menuActive: boolean;
     constructor(private service: UserService) {
         
     }
@@ -53,6 +54,11 @@ export class appMain implements OnInit {
     ngOnInit()
     {
         this.syncronize();
+    }
+
+    showMenu()
+    {
+        this.menuActive = !this.menuActive;
     }
 
     syncronize()
