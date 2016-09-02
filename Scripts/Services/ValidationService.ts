@@ -1,21 +1,16 @@
 import {UserService} from "./UserService";
 import {Injectable} from "@angular/core";
 
-@Injectable()
-export class ValidationService
+export  class ValidationService
 {
-    public constructor(public service: UserService)
-    {
 
-    }
-
-    userLoginValidator(control)
+   static userLoginValidator(control, service: UserService)
     {
         if (control.value === undefined || control.value === "" )
         {
             return { 'invalidLogin': true };
         }
-        else if (this.service.checkIsLoginExists(control.value))
+        else if (service.checkIsLoginExists(control.value))
         {
             return { 'invalidLogin': true };
         }else
@@ -24,7 +19,7 @@ export class ValidationService
         }
     }
 
-    getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
+   static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
         let config = {
             'required': 'Required',
             'invalidLogin':'UserLoginBusy',
@@ -36,7 +31,7 @@ export class ValidationService
         return config[validatorName];
     }
 
-    emailValidator(control) {
+   static emailValidator(control) {
         if (control.value !== undefined && control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) {
             return null;
         } else {
@@ -44,7 +39,7 @@ export class ValidationService
         }
     }
 
-    passwordValidator(control) {
+   static passwordValidator(control) {
         if ( control.value != undefined && control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$/)) {
             return null;
         } else {

@@ -7,6 +7,7 @@ import {DateTimeControl} from "../HelpControls/DateTimeControl";
 import {ValidationsMessagesControl} from "../HelpControls/ValidationMessagesControl";
 import {ValidationService} from "../Services/ValidationService";
 import {UserLoginValidator} from "../HelpControls/UserLoginValidator"
+import { Inject } from "@angular/core"
 
 @Component({
         template:`<div class="offset-md-4 col-md-4">
@@ -54,13 +55,13 @@ export class UserRegisterComponent {
     newUser = new User();
 
     form : FormGroup;
-    namefc = new  FormControl('',Validators.compose([Validators.required,this.validationService.userLoginValidator.bind(this.validationService)]) );
-    passwordfc = new  FormControl('', Validators.compose([Validators.required,this.validationService.passwordValidator]));
-    emailfc = new  FormControl('', Validators.compose([Validators.required,this.validationService.emailValidator]));
+    namefc = new  FormControl('',Validators.compose([Validators.required, this.validator]) );
+    passwordfc = new  FormControl('', Validators.compose([Validators.required,ValidationService.passwordValidator]));
+    emailfc = new  FormControl('', Validators.compose([Validators.required,ValidationService.emailValidator]));
     bithdayfc = new  FormControl('', Validators.required);
     isMalefc = new FormControl('');
 
-    public constructor (fb:FormBuilder,private service: UserService,public validationService: ValidationService ){
+    public constructor (@Inject('NameValidator') private validator,fb:FormBuilder,private service: UserService,public validationService: ValidationService ){
         this.newUser.bithday = new Date();
         this.form = fb.group({
             "namefc" : this.namefc,

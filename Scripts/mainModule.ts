@@ -1,5 +1,4 @@
 import { bootstrap }    from '@angular/platform-browser-dynamic';
-import {} from "@angular/forms";
 import {HTTP_PROVIDERS} from '@angular/http';
 import { appMain } from './appMain';
 import {APP_ROUTER_PROVIDERS} from './Routers/app.routes';
@@ -43,7 +42,12 @@ import {ValidationService} from './Services/ValidationService'
       SearchViewModel,
       {
         provide: 'NameValidator',
-        useFactory: (control:Control) => (userAccountService:UserService) => validatePassword(userAccountService),
+        useFactory: (control) =>(userAccountService:UserService)=>
+        { 
+          
+            return ValidationService.userLoginValidator(control,userAccountService);
+          
+        },
         deps: [UserService]
       }
   ],
