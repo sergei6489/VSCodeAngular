@@ -42,7 +42,7 @@ import {ValidationService} from './Services/ValidationService'
       SearchViewModel,
       {
         provide: 'NameValidator',
-        useFactory: (control) =>(userAccountService:UserService)=>
+        useFactory: (userAccountService:UserService) =>(control)=>
         { 
           
             return ValidationService.userLoginValidator(control,userAccountService);

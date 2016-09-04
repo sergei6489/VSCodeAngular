@@ -31,7 +31,16 @@
     },
     "passport-local/passport-local.d.ts": {
       "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
-    }
+    },
+    "mongoose/mongoose.d.ts":{
+      "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
+      },
+       "mongodb/mongodb.d.ts":{
+      "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
+      },
+       "mpromise/mpromise.d.ts":{
+      "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
+      }
   
   }
 }
