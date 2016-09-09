@@ -1,6 +1,4 @@
 import mongoose = require("mongoose");
-
-
 interface IUser extends mongoose.Document
 {
      name:string;
@@ -29,4 +27,4 @@ var _userSchema : mongoose.Schema = new mongoose.Schema({
         },
 });
 
-var _userModel = mongodb.model<>
+var _userModel = mongoose.model<IUser>("User",_userSchema);
