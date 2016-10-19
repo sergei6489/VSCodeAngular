@@ -1,7 +1,6 @@
-﻿import {Component} from "@angular/core"
-import {UserService} from "../Services/UserService"
+﻿import {Component} from "@angular/core";
+import {UserService} from "../Services/UserService";
 import {User} from "../ViewModels/UserViewModel";
-import {ROUTER_DIRECTIVES} from "@angular/router"
 
 @Component({
     template:`

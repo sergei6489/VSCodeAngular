@@ -11,7 +11,7 @@ import {ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, FormControl} fro
                         <div class="input-group-btn ">
                             <button type="button" (click)="click()"  class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                             <ul #menuRef class="dropdown-menu dropdown-menu-right" role="menu">
-                                <li *ngFor="#direction of directions" class="dropdown-item"><a href="javascript:void(0)" (click)="selectItem($event)" >{{direction}}</a></li>
+                                <li *ngFor="let direction of directions" class="dropdown-item"><a href="javascript:void(0)" (click)="selectItem($event)" >{{direction}}</a></li>
                             </ul>
                         </div>
                     </div>

@@ -1,12 +1,13 @@
-import { bootstrap }    from '@angular/platform-browser-dynamic';
-import {HTTP_PROVIDERS} from '@angular/http';
 import { appMain } from './appMain';
-import {APP_ROUTER_PROVIDERS} from './Routers/app.routes';
+import { HttpModule } from "@angular/http";
+import {AppRoutingModule} from './Routers/app.routes';
 import {NgModule} from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { ReactiveFormsModule,FormsModule   }    from '@angular/forms';
 import {UserLoginComponent} from './Components/UserLoginComponent';
 import {UserRegisterComponent} from './Components/UserRegisterComponent';
+import {UsersViewComponent} from './Components/UsersViewComponent';
+import {TicketComponent} from './Components/TicketComponent';
 import {ShipmentsComponent} from './Components/ShipmentsComponent';
 import {UserService} from './Services/UserService';
 import {ShipmentService} from './Services/ShipmentService';
@@ -17,13 +18,16 @@ import {DateTimeControl} from './HelpControls/DateTimeControl';
 import {PassengersControl} from './HelpControls/PassengersControl';
 import {ValidationsMessagesControl} from './HelpControls/ValidationMessagesControl';
 import {ValidationService} from './Services/ValidationService'
+import { RouterModule }   from '@angular/router';
 
 @NgModule({
   imports: [
+    HttpModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    APP_ROUTER_PROVIDERS
+    RouterModule,
+    AppRoutingModule
   ],
   declarations: [
     UserLoginComponent,
@@ -32,10 +36,12 @@ import {ValidationService} from './Services/ValidationService'
     DateTimeControl,
     SearchControl,
     PassengersControl,
+    TicketComponent,
+    UsersViewComponent,
+    appMain,
     ValidationsMessagesControl
   ],
   providers: [
-      HTTP_PROVIDERS,
       UserService,
       ShipmentService,
       ValidationService,
@@ -43,10 +49,8 @@ import {ValidationService} from './Services/ValidationService'
       {
         provide: 'NameValidator',
         useFactory: (userAccountService:UserService) =>(control)=>
-        { 
-          
-            return ValidationService.userLoginValidator(control,userAccountService);
-          
+        {  
+            return ValidationService.userLoginValidator(control,userAccountService);         
         },
         deps: [UserService]
       }

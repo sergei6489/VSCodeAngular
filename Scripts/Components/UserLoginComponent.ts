@@ -1,6 +1,5 @@
 ﻿import {Component} from "@angular/core";
-import {FormBuilder,FormControl,FormGroup,Validators,REACTIVE_FORM_DIRECTIVES,FORM_DIRECTIVES} from "@angular/forms";
-import {ROUTER_DIRECTIVES} from "@angular/router"
+import {FormBuilder,FormControl,FormGroup,Validators} from "@angular/forms";
 import {UserService} from "../Services/UserService" 
 import global = require("../globalVariables")
 import {ValidationsMessagesControl} from "../HelpControls/ValidationMessagesControl"

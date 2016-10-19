@@ -1,4 +1,5 @@
-﻿import { RouterModule, Routes }  from '@angular/router';
+﻿import { NgModule }             from '@angular/core';
+import { RouterModule, Routes }  from '@angular/router';
 import {UsersViewComponent } from "../Components/UsersViewComponent";
 import {UserEditComponent} from "../Components/UserEditComponent";
 import {UserRegisterComponent} from "../Components/UserRegisterComponent";
@@ -21,5 +22,8 @@ export const routes: Routes = [
         path:"register", component: UserRegisterComponent
     }
 ];
-
-export const APP_ROUTER_PROVIDERS = RouterModule.forRoot(routes);
+@NgModule({
+  imports: [ RouterModule.forRoot(routes) ],
+  exports: [ RouterModule ]
+})
+export class AppRoutingModule {}

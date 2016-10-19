@@ -1,5 +1,4 @@
-﻿import {ROUTER_DIRECTIVES} from "@angular/router";
-import {Component, ViewChild, OnInit} from '@angular/core';
+﻿import {Component, ViewChild, OnInit} from '@angular/core';
 import { Shipment, Direction } from '../ViewModels/ShipmentViewModel';
 import {ShipmentDetailComponent} from '../Components/shipmentDetailComponent';
 import { ShipmentEditComponent } from '../Components/shipmentEditComponent';
@@ -9,10 +8,6 @@ import { BaseService } from "../Services/BaseService";
 import { SearchViewModel } from "../ViewModels/SearchViewModel";
 import { PagerShipmentsViewModel } from "../ViewModels/PagerShipmentsViewModel";
 import { DateTimeControl } from "../HelpControls/DateTimeControl";
-import { MdButton } from "@angular2-material/button"
-import { MD_PROGRESS_CIRCLE_DIRECTIVES} from "@angular2-material/progress-circle";
-import { MD_CHECKBOX_DIRECTIVES } from "@angular2-material/checkbox";
-import {MD_CARD_DIRECTIVES} from "@angular2-material/card";
 import {FormGroup,FormControl,FormBuilder,Validators} from "@angular/forms";
 
 @Component({

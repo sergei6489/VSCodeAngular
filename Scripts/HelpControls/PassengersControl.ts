@@ -1,48 +1,12 @@
 import {Component,Input, Output} from "@angular/core"
-import {FORM_DIRECTIVES,REACTIVE_FORM_DIRECTIVES, FormGroup,FormBuilder, FormControl,Validators} from '@angular/forms';
-import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
-import { MD_CHECKBOX_DIRECTIVES } from "@angular2-material/checkbox";
-import {MdInput} from "@angular2-material/input";
-import {MD_LIST_DIRECTIVES} from "@angular2-material/list";
-import {MD_TOOLBAR_DIRECTIVES} from "@angular2-material/toolbar";
-import {MD_SLIDE_TOGGLE_DIRECTIVES} from "@angular2-material/slide-toggle";
-import {MD_BUTTON_DIRECTIVES} from "@angular2-material/button";
-import {MdIcon,MdIconRegistry} from "@angular2-material/icon";
+import { FormGroup,FormBuilder, FormControl,Validators} from '@angular/forms';
 import {Passenger} from "../ViewModels/Passenger";
 
 @Component({
-    providers:[FormBuilder,MdIconRegistry],
-    directives:[
-        MD_CARD_DIRECTIVES,
-        MD_CHECKBOX_DIRECTIVES,
-        MdInput,
-        MdIcon,
-        MD_LIST_DIRECTIVES,
-        MD_TOOLBAR_DIRECTIVES,
-        MD_SLIDE_TOGGLE_DIRECTIVES,
-        MD_BUTTON_DIRECTIVES,
-        REACTIVE_FORM_DIRECTIVES,
-        FORM_DIRECTIVES],
+    providers:[FormBuilder],
     selector:"passengers-control",
     template:`<div class="offset-md-3 offset-sm-3 col-md-5 col-sm-5" style="padding-left:15px">                   
-                     <md-list>
-                            <md-list-item>                                
-                                <md-checkbox [checked]="selected" [hidden]="passengers.length==0" (click)="selectAllPassenger()"></md-checkbox>
-                                <button md-icon-button color="warn" [hidden]="passengers.length==0" (click)="removeSelectedPassenger(passenger)" >
-                                    <i class="material-icons" md-18>delete</i>
-                                </button>
-                            </md-list-item>
-                         <md-divider></md-divider>
-                            <md-list-item *ngFor='let passenger of passengers'>
-                            <md-checkbox [checked]="passenger.isSelect"> </md-checkbox>
-                                <h4 md-line>{{passenger.name}} </h4>
-                                <h4 md-line>{{passenger.surname}} </h4>
-                                <h4 md-line>{{passenger.age}} </h4>
-                                <button md-icon-button (click)="removePassenger(passenger)" >
-                                    <i class="material-icons" md-24>delete</i>
-                                </button>
-                            </md-list-item>
-                    </md-list>
+                     
                     
                     <div class="card clearfix">
                         <div class="card-header">

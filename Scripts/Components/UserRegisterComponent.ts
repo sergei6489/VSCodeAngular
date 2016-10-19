@@ -1,6 +1,5 @@
 ﻿import {Component} from "@angular/core";
-import {FORM_DIRECTIVES,FormControl,FormBuilder,FormGroup,REACTIVE_FORM_DIRECTIVES,Validators} from "@angular/forms";
-import {ROUTER_DIRECTIVES} from "@angular/router";
+import {FormsModule,FormControl,FormBuilder,FormGroup,Validators} from "@angular/forms";
 import {UserService} from "../Services/UserService";
 import {User} from "../ViewModels/UserViewModel";
 import {DateTimeControl} from "../HelpControls/DateTimeControl";
