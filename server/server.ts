@@ -1,5 +1,7 @@
 import express = require('express');
 import path = require('path');
+import db = require('./DB/mongodb');
+
 var cookieParser = require('cookie-parser');  
 var userController = require('./controllers/userController');
 var shipmentsController = require('./controllers/shipmentsController');
@@ -39,3 +41,5 @@ var server = app.listen(port, function() {
     var port = server.address().port;
     console.log('This express app is listening on port:' + port);
 });
+
+db.open();

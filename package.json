@@ -5,7 +5,7 @@
     "typings": "typings"
   }, 
     "dependencies": {
-   "@angular/common": "~2.1.0",
+    "@angular/common": "~2.1.0",
     "@angular/compiler": "~2.1.0",
     "@angular/core": "~2.1.0",
     "@angular/forms": "~2.1.0",
@@ -32,6 +32,7 @@
     "gulp-concat": "2.6.0",
     "body-parser":"*",
     "zone.js": "^0.6.12",
+    "mongoose": "^4.6.1",
     "font-awesome":"*"
     },
     "devDependencies": {

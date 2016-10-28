@@ -19,3 +19,6 @@ class DBAccess {
            return this.mongooseInstance;
         }
 }
+
+DBAccess.open();
+export = DBAccess;
