@@ -65,7 +65,7 @@ export class MockShipmentService implements IShipmentService
             {
                 result.push(n.to);
             }
-        });
-        return result;
+       });
+       return result;
    }
 }

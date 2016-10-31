@@ -1,15 +1,6 @@
 import mongoose = require("mongoose");
 import userSchema = require("./userSchema");
-
-interface IShipment extends mongoose.Document
-{
-    from: string,
-    to: string,
-    dateTimeOut: any,
-    dateTimeInput: any,
-    places: Array<number>,
-    price: number
-}
+import IShipment = require('../DB/IShipment');
 
 var _shipmentSchema: mongoose.Schema = new mongoose.Schema({
     from:{
