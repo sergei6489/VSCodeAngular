@@ -1,14 +1,5 @@
 import mongoose = require("mongoose");
-
-interface IUser extends mongoose.Document
-{
-     name:string;
-     password:string;
-     bithday: Date;
-     isMale: string;
-     email:string;
-}
-
+import IUser = require("./IUser");
 
 var _userSchema : mongoose.Schema = new mongoose.Schema({
      name: {
@@ -25,7 +16,7 @@ var _userSchema : mongoose.Schema = new mongoose.Schema({
         },
      email:{
          type: String
-        },
+        }
 });
 
 var _userModel = mongoose.model<IUser>("users",_userSchema);

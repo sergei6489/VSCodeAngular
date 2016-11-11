@@ -1,6 +1,5 @@
 import mongoose = require("mongoose");
-import userSchema = require("./userSchema");
-import IShipment = require('../DB/IShipment');
+import IShipment = require("./IShipment");
 
 var _shipmentSchema: mongoose.Schema = new mongoose.Schema({
     from:{
@@ -16,13 +15,23 @@ var _shipmentSchema: mongoose.Schema = new mongoose.Schema({
         type: Date
     },
     price:{
-        type: Number
+        type: Number 
     },
     places:[{
-        number:{type:Number},
-        user:{type:userSchema}        
+        number:
+        {
+            type:Number
+        },
+        user:
+        {
+            name: String,
+            surname: String,
+            patronymic: String,
+            bithday: Date,
+            isMale: Boolean
+        }  
     }]
 });
- var _shipmentModel = mongoose.model<IShipment>("travels",_shipmentSchema);
+ var _shipmentModel = mongoose.model<IShipment>("travels",_shipmentSchema,'travels');
 
  export = _shipmentModel;

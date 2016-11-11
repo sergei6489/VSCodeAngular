@@ -1,10 +1,10 @@
 {
-    "name": "testApplication",
-    "version": "0.0.1",
-    "scripts": {
+  "name": "testApplication",
+  "version": "0.0.1",
+  "scripts": {
     "typings": "typings"
-  }, 
-    "dependencies": {
+  },
+  "dependencies": {
     "@angular/common": "~2.1.0",
     "@angular/compiler": "~2.1.0",
     "@angular/core": "~2.1.0",
@@ -14,37 +14,38 @@
     "@angular/platform-browser-dynamic": "~2.1.0",
     "@angular/router": "~3.1.0",
     "@angular/upgrade": "~2.1.0",
+    "body-parser": "*",
+    "bootstrap": "^3.3.6",
+    "cookie-parser": "1.4.3",
     "es6-promise": "3.1.2",
     "es6-shim": "^0.35.0",
     "express": "4.13.4",
-    "express-session":"*",
+    "express-jwt": "3.3.0",
+    "express-session": "*",
+    "font-awesome": "*",
+    "gulp-concat": "2.6.0",
+    "inversify": "^2.0.1",
+    "jquery": "2.2.3",
+    "jquery-ui": "^1.10.5",
+    "mongoose": "^4.6.1",
     "passport": "*",
     "passport-local": "*",
-    "cookie-parser":"1.4.3",
-    "express-jwt": "3.3.0",
-    "reflect-metadata": "0.1.3",
+    "reflect-metadata": "^0.1.3",
     "rxjs": "5.0.0-beta.6",
     "symbol-observable": "^0.2.4",
     "systemjs": "0.19.27",
-    "bootstrap": "^3.3.6",
-    "jquery": "2.2.3",
-    "jquery-ui": "^1.10.5",
-    "gulp-concat": "2.6.0",
-    "body-parser":"*",
-    "zone.js": "^0.6.12",
-    "mongoose": "^4.6.1",
-    "font-awesome":"*"
-    },
-    "devDependencies": {
+    "zone.js": "^0.6.12"
+  },
+  "devDependencies": {
     "browser-sync": "^2.9.3",
     "gulp": "^3.9.0",
     "gulp-concat": "2.6.0",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-tslint": "^3.2.0",
     "gulp-typescript": "^2.13.4",
-    "gulp-nodemon":"2.1.0",
+    "gulp-nodemon": "2.1.0",
     "superstatic": "^1.2.3",
     "typings": "1.0.4",
     "typescript": "1.8.10"
-    }
+  }
 }

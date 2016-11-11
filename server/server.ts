@@ -1,6 +1,7 @@
 import express = require('express');
 import path = require('path');
 import db = require('./DB/mongodb');
+import mongoose = require("mongoose");
 
 var cookieParser = require('cookie-parser');  
 var userController = require('./controllers/userController');
@@ -9,9 +10,8 @@ var port: number = process.env.PORT || 3000;
 var app = express();
 var bodyParser = require('body-parser')
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
-
+db.open();
 app.use(cookieParser());  
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -42,4 +42,9 @@ var server = app.listen(port, function() {
     console.log('This express app is listening on port:' + port);
 });
 
-db.open();
+mongoose.set('debug', function (collectionName, method, query, doc) {
+    console.info(query);
+})
+
+
+

@@ -10,3 +10,7 @@
 /// <reference path="mongoose/mongoose.d.ts" />
 /// <reference path="mongodb/mongodb.d.ts" />
 /// <reference path="mpromise/mpromise.d.ts" />
+/// <reference path="inversify/inversify.d.ts" />
+/// <reference path="express-session/express-session.d.ts" />
+/// <reference path="reflect-metadata/reflect-metadata.d.ts" />
+/// <reference path="custom.d.ts" />

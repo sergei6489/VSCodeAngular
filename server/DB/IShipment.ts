@@ -9,4 +9,5 @@ interface IShipment extends mongoose.Document
     places: Array<number>,
     price: number
 }
+
 export = IShipment;

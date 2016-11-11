@@ -7,4 +7,5 @@ export interface IUserService
     IsExistsUser( login:string, password: string ): boolean;
     Register(user: UserViewModel): boolean;
     DeleteUser(name: string):boolean;
+    getAllUser(): Array<UserViewModel>;
 }

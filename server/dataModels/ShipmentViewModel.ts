@@ -1,6 +1,6 @@
 import IShipment = require('../DB/IShipment');
 
-export class Shipment {
+export class ShipmentViewModel {
 
     private _shipmentModel: IShipment;
 

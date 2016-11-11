@@ -1,6 +1,6 @@
-import { Shipment } from './ShipmentViewModel'
+import { ShipmentViewModel } from './ShipmentViewModel'
 
 export class PagerShipmentsViewModel{
     public PageCount: number;
-    public Result : Array<Shipment>;
+    public Result : Array<ShipmentViewModel>;
 }
