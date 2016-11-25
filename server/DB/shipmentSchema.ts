@@ -1,17 +1,20 @@
-import mongoose = require("mongoose");
+import DBAccess = require("./mongodb");
 import IShipment = require("./IShipment");
 
-var _shipmentSchema: mongoose.Schema = new mongoose.Schema({
+var mongoose = DBAccess.mongooseInstance;
+var mongooseConnection = DBAccess.mongooseConnection;
+
+var _shipmentSchema = new mongoose.Schema({
     from:{
         type: String
     },
     to:{
         type: String
     },
-    dateTimeOut:{
+    dateTo:{
         type: Date
     },
-    dateTimeInput:{
+    dateFrom:{
         type: Date
     },
     price:{
@@ -21,17 +24,9 @@ var _shipmentSchema: mongoose.Schema = new mongoose.Schema({
         number:
         {
             type:Number
-        },
-        user:
-        {
-            name: String,
-            surname: String,
-            patronymic: String,
-            bithday: Date,
-            isMale: Boolean
         }  
     }]
 });
- var _shipmentModel = mongoose.model<IShipment>("travels",_shipmentSchema,'travels');
+var _shipmentModel = mongooseConnection.model<IShipment>("travels",_shipmentSchema);
 
- export = _shipmentModel;
+export = _shipmentModel;

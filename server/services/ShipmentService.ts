@@ -4,13 +4,14 @@ import {ShipmentViewModel} from  "../dataModels/ShipmentViewModel";
 import {PagerShipmentsViewModel} from "../dataModels/PagerShipmentsViewModel";
 import {SearchViewModel} from "../dataModels/SearchViewModel";
 import _shipmentSchema = require( "../DB/shipmentSchema" );
+import IShipment = require("../DB/IShipment");
 import { injectable, inject } from "inversify";
 
 @injectable()
 export class ShipmentService implements IShipmentService
 {
 
-    GetShipments(search: SearchViewModel,callback: (error: any, result: any) => void)
+    GetShipments(search: SearchViewModel,callback: (error: any, result: Array<IShipment>) => void)
     {
         var result : Array<ShipmentViewModel> = new Array<ShipmentViewModel>();
         var data = _shipmentSchema.find({});
@@ -44,13 +45,11 @@ export class ShipmentService implements IShipmentService
 
     GetDirectionsTo(value: string,callback: (error: any, result: any) => void)
     {
-        _shipmentSchema.find({'to': '/^'+value+'/','from':{$not: '/^'+value+'/'}},callback);
+        _shipmentSchema.find({'to': {$regex: '/^'+value+'/i'}},callback);
     }
 
     GetDirectionsFrom(value: string,callback: (error: any, result: any) => void)
     {
-        var result : Array<string> = new Array<string>();
-        _shipmentSchema.find({'from': '/^'+value+'/','to':{$not: '/^'+value+'/'}},callback);
-        return result;
+        _shipmentSchema.find({'from': {$regex: '/^'+value+'/i'}},callback);
     }
 }

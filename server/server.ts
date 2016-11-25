@@ -1,6 +1,6 @@
 import express = require('express');
 import path = require('path');
-import db = require('./DB/mongodb');
+var db = require('./DB/mongodb');
 import mongoose = require("mongoose");
 
 var cookieParser = require('cookie-parser');  

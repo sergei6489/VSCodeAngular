@@ -14,7 +14,7 @@ class DBAccess {
             this.mongooseConnection.once("open", () => {
                 console.log("Connection to mongodb.");
             });
-            
+        Mongoose.Promise = global.Promise;
            this.mongooseInstance = Mongoose.connect(Constants.DBConnectionString);
            return this.mongooseInstance;
         }

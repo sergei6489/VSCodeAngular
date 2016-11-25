@@ -4,10 +4,9 @@ interface IShipment extends mongoose.Document
 {
     from: string,
     to: string,
-    dateTimeOut: any,
-    dateTimeInput: any,
+    dateTo: any,
+    dateFrom: any,
     places: Array<number>,
     price: number
 }
-
 export = IShipment;

@@ -9,4 +9,4 @@ interface IUser extends mongoose.Document
      email:string;
 }
 
-export = IUser
+export = IUser;

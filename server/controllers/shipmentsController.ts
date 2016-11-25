@@ -2,6 +2,7 @@ import {IShipmentService} from '../services/IShipmentService';
 import {ShipmentViewModel} from '../dataModels/ShipmentViewModel';
 import kernel = require("../Ioc/inversify.config");
 import express = require('express');
+import IShipment = require("../DB/IShipment");
 var router = express.Router();
 var shipmentService : IShipmentService;
 
@@ -10,8 +11,8 @@ router.post("/search",(req: express.Request, res: express.Response) =>
 {
     var array = new Array<ShipmentViewModel>();
     res.setHeader('Content-Type', 'application/json');
-    shipmentService.GetShipments(req.body, (error:any, result: any)=>{
-        result.forEach(n=>{array.push(n)});
+    shipmentService.GetShipments(req.body, (error:any, result: Array<IShipment>)=>{
+        result.forEach(n=>{array.push( new ShipmentViewModel(n) )});
         res.send(JSON.stringify({result: array}));
     });
 });
@@ -39,4 +40,4 @@ router.get("/GetDetails/:id",(req: express.Request, res: express.Response) =>
         res.send(JSON.stringify({result: result }));
     });
 });
-module.exports= router;
+export = router;

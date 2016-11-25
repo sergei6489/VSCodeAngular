@@ -60,4 +60,4 @@ router.get('/checkIsLoginExists/:login',function(req: express.Request, res: expr
    res.send(JSON.stringify(true));
 });
 
-module.exports = router;
+export = router;
