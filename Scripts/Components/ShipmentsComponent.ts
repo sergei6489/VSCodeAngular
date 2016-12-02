@@ -9,6 +9,7 @@ import { SearchViewModel } from "../ViewModels/SearchViewModel";
 import { PagerShipmentsViewModel } from "../ViewModels/PagerShipmentsViewModel";
 import { DateTimeControl } from "../HelpControls/DateTimeControl";
 import {FormGroup,FormControl,FormBuilder,Validators} from "@angular/forms";
+import {ValidationService} from "../Services/ValidationService";
 
 @Component({
     selector: "testProject",
@@ -22,16 +23,17 @@ export class ShipmentsComponent implements OnInit {
     errorText: string;
     isLoad: boolean;
     myGroup: FormGroup;
-    test = new FormControl('', Validators.required);
-
     ngOnInit() {
         this.init();
     }
 
     constructor(public service: ShipmentService, public search: SearchViewModel,fb: FormBuilder) {
+        var self = this;
         this.myGroup = fb.group({
-            "smallestPricefc": new FormControl('', Validators.minLength(100)),
-            "highestPricefc": new FormControl('',Validators.minLength(100)),
+            "smallestPricefc": new FormControl('',(control)=>{ 
+                return ValidationService.minNumberValueValidator(control,self.search.highestPrice,100);
+            }),
+            "highestPricefc": new FormControl('',(control)=>{ return ValidationService.maxNumberValueValidator(control,10000,search.smallestPrice);}),
             "fromfc": new FormControl(''),
             "tofc": new FormControl(''),
             "departureDatefc": new FormControl(''),

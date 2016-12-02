@@ -2,7 +2,7 @@ import mongoose = require("mongoose");
 import IUser = require("./IUser");
 
 var _userSchema : mongoose.Schema = new mongoose.Schema({
-     name: {
+     login: {
          type: String
         },
      password:{

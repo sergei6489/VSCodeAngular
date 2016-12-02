@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import {IUserService} from "./IUserService";
 import {UserViewModel} from "../dataModels/UserViewModel";
 import { injectable, inject } from "inversify";
+import _userSchema = require('../DB/userSchema');
 
 @injectable()
 export class UserService implements IUserService
@@ -29,5 +30,9 @@ export class UserService implements IUserService
     getAllUser(): Array<UserViewModel>
     {
         return null;
+    }
+    IsLoginBusy(login: string,callback:(error:any,result: boolean)=>void)
+    {
+        _userSchema.find({'login': login},callback);
     }
 }

@@ -45,11 +45,11 @@ export class ShipmentService implements IShipmentService
 
     GetDirectionsTo(value: string,callback: (error: any, result: any) => void)
     {
-        _shipmentSchema.find({'to': {$regex: '/^'+value+'/i'}},callback);
+        _shipmentSchema.distinct('to',{'to': new RegExp('^'+value,'i')},callback);
     }
 
     GetDirectionsFrom(value: string,callback: (error: any, result: any) => void)
     {
-        _shipmentSchema.find({'from': {$regex: '/^'+value+'/i'}},callback);
+        _shipmentSchema.distinct('from',{'from':new RegExp('^'+value,'i')},callback);
     }
 }

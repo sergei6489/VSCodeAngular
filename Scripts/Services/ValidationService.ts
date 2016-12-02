@@ -25,6 +25,8 @@ export  class ValidationService
             'invalidLogin':'UserLoginBusy',
             'invalidEmailAddress': 'Invalid email address',
             'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',
+            'invalidMinPrice': 'InCorrect min price',
+            'invalidMaxPrice':'Invalid max price',
             'minlength': `Minimum length ${validatorValue.requiredLength}`
         };
 
@@ -44,6 +46,30 @@ export  class ValidationService
             return null;
         } else {
             return { 'invalidPassword': true };
+        }
+    }
+
+    static minNumberValueValidator(control,maxValue: number,minValue: number)
+    {
+        var value = Number.parseInt(control.value);
+        if ( isNaN( value ) && value < maxValue && value>minValue)
+        {
+            return {  'invalidMinPrice': true };
+        }
+        else{
+            return null;
+        }
+    }
+
+    static maxNumberValueValidator(control,maxValue: number,minValue: number)
+    {
+        var value = Number.parseInt(control.value);
+        if ( isNaN( value ) && value < maxValue && value>minValue)
+        {
+            return {  'invalidMaxPrice': true };
+        }
+        else{
+            return null;
         }
     }
 }

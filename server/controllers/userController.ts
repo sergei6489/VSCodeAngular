@@ -57,6 +57,7 @@ router.post('/register',function(req: express.Request, res: express.Response){
 router.get('/checkIsLoginExists/:login',function(req: express.Request, res: express.Response)
 {
    res.setHeader('Content-Type','application/json');
+   var isExists = service.Is
    res.send(JSON.stringify(true));
 });
 
