@@ -3,36 +3,55 @@ import {IUserService} from "./IUserService";
 import {UserViewModel} from "../dataModels/UserViewModel";
 import { injectable, inject } from "inversify";
 import _userSchema = require('../DB/userSchema');
+import User = require("../DB/IUser")
 
 @injectable()
 export class UserService implements IUserService
 {
-    public GetUserById( id:number ): UserViewModel
+    public GetUserById( id:string, callback: (error: any, result: User)=>void )
     {
-        return null;
+        _userSchema.findById(id,callback);
     }
-    GetUserByLogin( login:string ): UserViewModel
+    public GetUserByLogin( login:string,callback: (error: any,result: User)=>void )
     {
-        return null;
+        _userSchema.findOne({login:login},callback);
     }
-    IsExistsUser( login:string, password: string ): boolean
+    public IsExistsUser( login:string, password: string, callback: (error:any, result: User)=>void )
     {
-        return true;
+        _userSchema.findOne({login:login,password:password},callback);
     }
-    Register(user: UserViewModel): boolean
+    public Register(user: UserViewModel,callback: (error:any, result:any)=>void )
     {
-        return true;
+        var newUser = new User();
+        newUser.name = user.name;
+        newUser.password = user.password;
+        newUser.bithday = user.bithday;
+        newUser.isMale = user.isMail;
+        newUser.email = user.email;
+        _userSchema.create(newUser,callback);
     }
-    DeleteUser(name: string):boolean
+
+    public DeleteUser(name: string,callback: (error:any)=>void)
     {
-        return true;
+        _userSchema.remove({login: name}, callback);
     }
-    getAllUser(): Array<UserViewModel>
+
+    public getAllUser( pageIndex: number, listCount: number , callback: (error:any, result: Array<User>,totalPageCount: number)=>void )
+    {    
+        _userSchema.count({},(err,count)=>
+        {
+            var pageCount = count / listCount;
+            _userSchema.find({}).skip(pageIndex * listCount)
+            .limit(listCount).exec((error,docs)=>
+            {
+                callback(null,docs,count);
+            });
+        });
+    }
+
+    public IsLoginBusy(login: string, callback: (result:boolean)=> void)
     {
-        return null;
+        _userSchema.count({login : login}, (count)=>callback(count>0));
     }
-    IsLoginBusy(login: string,callback:(error:any,result: boolean)=>void)
-    {
-        _userSchema.find({'login': login},callback);
-    }
+    
 }

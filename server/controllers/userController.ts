@@ -45,8 +45,8 @@ router.get('/deleteUser/:name',function(req: express.Request, res: express.Respo
 //toDo get all user
 router.get('/getAll',function(req: express.Request, res: express.Response){
     res.setHeader('Content-Type','application/json');
-    var users = service.getAllUser();
-    res.send(JSON.stringify(users));
+    //var users = service.getAllUser();
+   // res.send(JSON.stringify(users));
 });
 
 router.post('/register',function(req: express.Request, res: express.Response){

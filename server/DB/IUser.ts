@@ -1,12 +1,12 @@
 import mongoose = require("mongoose");
 
-interface IUser extends mongoose.Document
+class User extends mongoose.Document
 {
      name:string;
      password:string;
      bithday: any;
-     isMale: string;
+     isMale: boolean;
      email:string;
 }
 
-export = IUser;
+export = User;
