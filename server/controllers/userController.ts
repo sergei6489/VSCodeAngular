@@ -10,7 +10,9 @@ var LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    var _user = service.GetUserByLogin(username);
+    var _user = service.GetUserByLogin(username,(error,result)=>{
+        result
+    });
     if (_user == null)
     {
         return done(null, false, { message: 'Incorrect username.' });
@@ -38,8 +40,10 @@ router.get('/checkIsAuth', function(req: express.Request, res: express.Response)
 //toDo delete user by name
 router.get('/deleteUser/:name',function(req: express.Request, res: express.Response){
     res.setHeader('Content-Type','application/json');
-    var isDeleted = service.DeleteUser(req.param(":name"));
-    res.send(JSON.stringify({success: isDeleted}));
+    service.DeleteUser(req.param(":name"),(error)=>{
+            res.send(JSON.stringify({success: error==null}));
+    });
+
 });
 
 //toDo get all user
@@ -50,15 +54,20 @@ router.get('/getAll',function(req: express.Request, res: express.Response){
 });
 
 router.post('/register',function(req: express.Request, res: express.Response){
-    var success =  service.Register(req.body);
+    var success =  service.Register(req.body,(error,result)=>{
+        res.send(JSON.stringify({success: error==null}));
+    });
     
 });
 
 router.get('/checkIsLoginExists/:login',function(req: express.Request, res: express.Response)
 {
    res.setHeader('Content-Type','application/json');
-   var isExists = service.Is
-   res.send(JSON.stringify(true));
+   var login = req.param(":login");
+   var isExists = service.IsExistsUser(login,(error,result)=>{
+        res.send(JSON.stringify(result!=null));
+   });
+  
 });
 
 export = router;

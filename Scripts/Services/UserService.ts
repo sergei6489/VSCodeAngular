@@ -19,32 +19,32 @@ export class UserService extends BaseService
 
     logOff()
     {
-         return this.http.get('/user/logoff').map(res => res.json(), this.headers);
+         return this.http.get('./user/logoff').map(res => res.json(), this.headers);
     }
 
     register(user: User)
     {
-        return this.http.post("/users/register",JSON.stringify( user ),this.options)
+        return this.http.post("./users/register",JSON.stringify( user ),this.options)
         .map(this.ExtractData).catch(this.handleError);
     }
 
     deleteUser(name: string)
     {
-       return this.http.get( '/user/deleteUser?name=' + name ).map(this.ExtractData).catch(this.handleError);
+       return this.http.get( './user/deleteUser?name=' + name ).map(this.ExtractData).catch(this.handleError);
     }
 
     getUsers()
     {
-        return this.http.get('/user/getAll').map(this.ExtractData).catch(this.handleError);
+        return this.http.get('./user/getAll').map(this.ExtractData).catch(this.handleError);
     }
 
     checkIsAuth()
     {
-        return this.http.get('/user/checkIsAuth').map(this.ExtractData).catch(this.handleError);
+        return this.http.get('./user/checkIsAuth').map(this.ExtractData).catch(this.handleError);
     }
 
     checkIsLoginExists(login: string)
     {
-        return this.http.get('/user/checkIsLoginExists?login='+login).map(this.ExtractData).catch(this.handleError);
+        return this.http.get('./user/checkIsLoginExists?login='+login).map(this.ExtractData).catch(this.handleError);
     }
 }

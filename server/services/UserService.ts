@@ -16,9 +16,9 @@ export class UserService implements IUserService
     {
         _userSchema.findOne({login:login},callback);
     }
-    public IsExistsUser( login:string, password: string, callback: (error:any, result: User)=>void )
+    public IsExistsUser( login:string, callback: (error:any, result: User)=>void )
     {
-        _userSchema.findOne({login:login,password:password},callback);
+        _userSchema.findOne({login:login},callback);
     }
     public Register(user: UserViewModel,callback: (error:any, result:any)=>void )
     {
