@@ -42,7 +42,7 @@ var server = app.listen(port, function() {
     console.log('This express app is listening on port:' + port);
 });
 
-mongoose.set('debug', function (collectionName, method, query, doc) {
+mongoose.set('error', function (collectionName, method, query, doc) {
     console.info(query);
 })
 

@@ -18,7 +18,7 @@ export class UserService implements IUserService
     }
     public IsExistsUser( login:string, callback: (error:any, result: User)=>void )
     {
-        _userSchema.findOne({login:login},callback);
+        _userSchema.findOne({'login':login},callback);
     }
     public Register(user: UserViewModel,callback: (error:any, result:any)=>void )
     {
@@ -51,7 +51,7 @@ export class UserService implements IUserService
 
     public IsLoginBusy(login: string, callback: (result:boolean)=> void)
     {
-        _userSchema.count({login : login}, (count)=>callback(count>0));
+        _userSchema.count({"login" : login}, (count)=>callback(count>0));
     }
     
 }

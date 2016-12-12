@@ -10,6 +10,7 @@ import { PagerShipmentsViewModel } from "../ViewModels/PagerShipmentsViewModel";
 import { DateTimeControl } from "../HelpControls/DateTimeControl";
 import {FormGroup,FormControl,FormBuilder,Validators} from "@angular/forms";
 import {ValidationService} from "../Services/ValidationService";
+import {UserService} from "../Services/UserService";
 
 @Component({
     selector: "testProject",
@@ -27,7 +28,7 @@ export class ShipmentsComponent implements OnInit {
         this.init();
     }
 
-    constructor(public service: ShipmentService, public search: SearchViewModel,fb: FormBuilder) {
+    constructor(public service: ShipmentService, public test: UserService, public search: SearchViewModel,fb: FormBuilder) {
         var self = this;
         this.myGroup = fb.group({
             "smallestPricefc": new FormControl('',(control)=>{ 
@@ -59,17 +60,14 @@ export class ShipmentsComponent implements OnInit {
         {
             this.shipments = [];
             this.isLoad = true;
-            var self = this;
-            setTimeout(function () {
-                self.service.getShipments(self.search).
+            this.service.getShipments(this.search).
                     subscribe(res => {
                         res.result.forEach((data: Shipment) => {
-                            self.shipments.push(new Shipment(data.id, data.from, data.to, new Date(data.dateTimeOut), new Date(data.dateTimeInput), data.places, data.price));
+                            this.shipments.push(new Shipment(data.id, data.from, data.to, new Date(data.dateTimeOut), new Date(data.dateTimeInput), data.places, data.price));
                         });
-                        self.search.pageCount = res.PageCount;
-                        self.isLoad = false;
-                    }, error => { self.errorText = error; self.isLoad = false; });
-            },2000);
+                        this.search.pageCount = res.PageCount;
+                        this.isLoad = false;
+                    }, error => { this.errorText = error; this.isLoad = false; });
         }
         else{
             this.myGroup.controls["smallestPricefc"].markAsDirty();

@@ -36,6 +36,7 @@ router.get("/GetDirectionsTo",(req: express.Request, res: express.Response) =>
 router.get("/GetDetails/:id",(req: express.Request, res: express.Response) =>
 {
     res.setHeader('Content-Header','application/json');
+    
     var data = shipmentService.GetShipment(req.params[":id"],(error:any,result:any)=>{
         res.send(JSON.stringify({result: result }));
     });
