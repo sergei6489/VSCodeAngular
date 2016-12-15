@@ -26,7 +26,7 @@ export class UserService extends BaseService
     register(user: User)
     {
         return this.http.post("user/register",JSON.stringify( user ),this.options)
-        .map(this.ExtractData).catch(this.handleError);
+        .toPromise().then(response => response.json()).catch(this.handleError);
     }
 
     deleteUser(name: string)
@@ -46,6 +46,6 @@ export class UserService extends BaseService
 
     checkIsLoginExists(login: string)
     {
-        return this.http.get('user/checkIsLoginExists/'+login).toPromise().then(response => response.json()).catch(this.handleError);;
+        return this.http.get('user/checkIsLoginExists/'+login).toPromise().then(response => response.json()).catch(this.handleError);
     }
 }

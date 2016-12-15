@@ -1,7 +1,7 @@
 import { appMain } from './appMain';
 import { HttpModule } from "@angular/http";
 import {AppRoutingModule} from './Routers/app.routes';
-import {NgModule} from '@angular/core';
+import {NgModule, Provider, forwardRef} from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { ReactiveFormsModule,FormsModule   }    from '@angular/forms';
 import {UserLoginComponent} from './Components/UserLoginComponent';
@@ -19,6 +19,9 @@ import {PassengersControl} from './HelpControls/PassengersControl';
 import {ValidationsMessagesControl} from './HelpControls/ValidationMessagesControl';
 import {ValidationService} from './Services/ValidationService'
 import { RouterModule }   from '@angular/router';
+import {NG_ASYNC_VALIDATORS} from 'angular2/common';
+
+
 
 @NgModule({
   imports: [
@@ -50,7 +53,7 @@ import { RouterModule }   from '@angular/router';
         provide: 'NameValidator',
         useFactory: (userAccountService:UserService) =>(control)=>
         {  
-            return ValidationService.userLoginValidator(control,userAccountService);         
+            return ValidationService.userLoginValidator(control,userAccountService);       
         },
         deps: [UserService]
       }

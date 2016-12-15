@@ -1,5 +1,8 @@
 import mongoose = require("mongoose");
 import IUser = require("./IUser");
+import DBAccess = require("./mongodb");
+
+var mongooseConnection = DBAccess.mongooseConnection;
 
 var _userSchema : mongoose.Schema = new mongoose.Schema({
      login: {
@@ -19,6 +22,6 @@ var _userSchema : mongoose.Schema = new mongoose.Schema({
         }
 });
 
-var _userModel = mongoose.model<IUser>("users",_userSchema);
+var _userModel = mongooseConnection.model<IUser>("users",_userSchema);
 
 export = _userModel;

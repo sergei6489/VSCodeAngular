@@ -5,8 +5,8 @@ import {User} from "../ViewModels/UserViewModel";
 import {DateTimeControl} from "../HelpControls/DateTimeControl";
 import {ValidationsMessagesControl} from "../HelpControls/ValidationMessagesControl";
 import {ValidationService} from "../Services/ValidationService";
-import {UserLoginValidator} from "../HelpControls/UserLoginValidator"
 import { Inject } from "@angular/core"
+import {Router} from '@angular/router';
 
 @Component({
         template:`<div class="offset-md-4 col-md-4">
@@ -14,19 +14,20 @@ import { Inject } from "@angular/core"
                         <div class="card-header">Registration</div>
                         <div class="card-block">
                             <form [formGroup]="form" class="form-horizontal">
-                                <div class="form-group" [class.has-danger]="namefc.dirty && !namefc.valid">
+                                <div class="form-group" [class.has-danger]="namefc.dirty && !namefc.pending && !namefc.valid" [class.has-success]="namefc.dirty && !namefc.pending &&  namefc.valid">
                                 <label>Name</label>
-                                    <input [(ngModel)]="newUser.name" formControlName="namefc" class="form-control form-control-danger" >
-                                        <validationMessage [control]="namefc"></validationMessage>
+                                    <input [(ngModel)]="newUser.name" formControlName="namefc" class="form-control" [class.form-control-success]="namefc.dirty && !namefc.pending &&  namefc.valid" >
+                                    <span *ngIf="namefc.pending">Checking duplication...</span>
+                                    <validationMessage [control]="namefc"></validationMessage>   
                                 </div>
-                                <div class="form-group" [class.has-danger]="passwordfc.dirty && !passwordfc.valid">
+                                <div class="form-group" [class.has-danger]="passwordfc.dirty && !passwordfc.valid" [class.has-success]="passwordfc.dirty &&  passwordfc.valid">
                                 <label>Password</label>
-                                    <input [(ngModel)]="newUser.password" formControlName="passwordfc" class="form-control form-control-danger" >
+                                    <input [(ngModel)]="newUser.password" formControlName="passwordfc" class="form-control" [class.form-control-success]="passwordfc.dirty &&  passwordfc.valid" >
                                         <validationMessage [control]="passwordfc"></validationMessage>
                                 </div>
-                                <div class="form-group" [class.has-danger]="emailfc.dirty && !emailfc.valid">
+                                <div class="form-group" [class.has-danger]="emailfc.dirty && !emailfc.valid" [class.has-success]="emailfc.dirty &&  emailfc.valid">
                                     <label>Email</label>
-                                    <input [(ngModel)]="newUser.email" formControlName="emailfc" class="form-control form-control-danger" >
+                                    <input [(ngModel)]="newUser.email" formControlName="emailfc" class="form-control" [class.form-control-success]="emailfc.dirty &&  emailfc.valid">
                                         <validationMessage [control]="emailfc"></validationMessage>
                                 </div>
                                 <div class="form-group" [class.has-danger]="bithdayfc.dirty && !bithdayfc.valid">
@@ -54,14 +55,14 @@ export class UserRegisterComponent {
     newUser = new User();
 
     form : FormGroup;
-    namefc = new  FormControl('',Validators.compose([Validators.required, this.validator]) );
+    namefc = new  FormControl('',Validators.required,this.validator );
     passwordfc = new  FormControl('', Validators.compose([Validators.required,ValidationService.passwordValidator]));
     emailfc = new  FormControl('', Validators.compose([Validators.required,ValidationService.emailValidator]));
     bithdayfc = new  FormControl('', Validators.required);
     isMalefc = new FormControl('');
 
     public constructor (@Inject('NameValidator') private validator,fb:FormBuilder,private service: UserService,public validationService: ValidationService ){
-        this.newUser.bithday = new Date();
+       
         this.form = fb.group({
             "namefc" : this.namefc,
             "passwordfc" : this.passwordfc,
@@ -75,7 +76,13 @@ export class UserRegisterComponent {
     {
         if (this.form.valid)
         {
-            this.service.register(this.newUser);
+            this.service.register(this.newUser).then(result=> {
+                if (result==null)
+                {
+
+                }
+                console.log("insert");
+            });
         }
         else
         {

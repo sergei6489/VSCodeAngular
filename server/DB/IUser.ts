@@ -4,7 +4,7 @@ class User extends mongoose.Document
 {
      name:string;
      password:string;
-     bithday: any;
+     bithday: Date;
      isMale: boolean;
      email:string;
 }

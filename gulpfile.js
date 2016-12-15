@@ -13,7 +13,7 @@ gulp.task('build-client', function() {
     var tsResult = gulp
         .src(config.clientTs)
         .pipe(sourcemaps.init())
-        .pipe(tsc(tsProject));
+        .pipe(tsProject());
         // копируем systemjs.config.js 
         gulp.src([config.systemjs]).pipe(gulp.dest('./debug/client/'));
         // копируем css
@@ -31,7 +31,7 @@ gulp.task('build:server', function () {
 	var localProject = tsc.createProject('server/tsconfig.json');
     gulp.src(config.nodeTs)
 		.pipe(sourcemaps.init())
-        .pipe(tsc(localProject)).js
+        .pipe(localProject()).js
         .pipe(sourcemaps.write()) 
 		.pipe(gulp.dest('./debug/'));
 });

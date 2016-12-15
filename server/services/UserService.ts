@@ -4,6 +4,9 @@ import {UserViewModel} from "../dataModels/UserViewModel";
 import { injectable, inject } from "inversify";
 import _userSchema = require('../DB/userSchema');
 import User = require("../DB/IUser")
+import DBAccess = require("../DB/mongodb");
+import mongoose = require("mongoose");
+
 
 @injectable()
 export class UserService implements IUserService
@@ -22,13 +25,26 @@ export class UserService implements IUserService
     }
     public Register(user: UserViewModel,callback: (error:any, result:any)=>void )
     {
-        var newUser = new User();
-        newUser.name = user.name;
-        newUser.password = user.password;
-        newUser.bithday = user.bithday;
-        newUser.isMale = user.isMail;
-        newUser.email = user.email;
-        _userSchema.create(newUser,callback);
+
+        this.IsExistsUser(user.name,(error,result)=>{
+            if (result==null)
+            {
+               var newUser = new _userSchema({
+                    name : user.name,
+                    password : user.password,
+                    bithday : this.ConvertStringToDate(user.bithday.toString()),
+                    isMale : true,
+                    email : user.email,
+                });
+                newUser.save(callback); 
+            }
+            else
+            {
+                callback("duplicate",null);
+            }
+        });
+
+        
     }
 
     public DeleteUser(name: string,callback: (error:any)=>void)
@@ -52,6 +68,20 @@ export class UserService implements IUserService
     public IsLoginBusy(login: string, callback: (result:boolean)=> void)
     {
         _userSchema.count({"login" : login}, (count)=>callback(count>0));
+    }
+
+    private ConvertStringToDate(text: string): Date
+    {
+        if (text!=null)
+        {
+            var array = new Array<number>();
+            text.split('.').forEach(n=> array.push(Number.parseInt(n)));
+            return new Date(array[2],array[1],array[0]);
+        }
+        else
+        {
+            return null;
+        }
     }
     
 }

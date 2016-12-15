@@ -1138,7 +1138,7 @@ declare module "mongoose" {
          * potentially overwritting any changes that happen between when you retrieved the object
          * and when you save it.
          */
-        sort(compare?: Function): T[];
+        //sort(compare?: Function): T[];
 
         /**
          * Wraps Array#splice with proper change tracking and casting.

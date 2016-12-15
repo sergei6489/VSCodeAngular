@@ -65,8 +65,8 @@ router.get('/checkIsLoginExists/:login',function(req: express.Request, res: expr
    res.setHeader('Content-Type','application/json');
    var login = req.param("login");
    var isExists = service.IsExistsUser(login,(error,result)=>{
-       console.log(result);
-        res.send(JSON.stringify(result==null));
+       console.log(result!=null);
+        res.send(JSON.stringify( result!=null));
    });
   
 });

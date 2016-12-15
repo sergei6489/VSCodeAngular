@@ -6,17 +6,31 @@ export  class ValidationService
 
    static userLoginValidator(control, service: UserService)
     {
-        if (control.value === undefined || control.value === "" )
-        {
-            return { 'invalidLogin': true };
-        }
-        else if (service.checkIsLoginExists(control.value))
-        {
-            return { 'invalidLogin': true };
-        }else
-        {
-            return null;
-        }
+            return new Promise((resolve,reject)=>
+            {
+                
+                    if (control.value === undefined || control.value === "" )
+                    {
+                        resolve({ 'invalidLogin': true });
+                    }
+                    else 
+                    {
+                        service.checkIsLoginExists(control.value).then(result=>
+                        {
+                            setTimeout(function() 
+                            {
+                                if (result==true)
+                                {
+                                    resolve( { 'invalidLogin': true });
+                                } else{
+                                    resolve(null);
+                                }
+                            }, 1000);
+                        });
+                       
+                    } 
+                   
+             });  
     }
 
    static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
@@ -27,7 +41,7 @@ export  class ValidationService
             'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',
             'invalidMinPrice': 'InCorrect min price',
             'invalidMaxPrice':'Invalid max price',
-            'minlength': `Minimum length ${validatorValue.requiredLength}`
+            //'minlength': `Minimum length ${validatorValue.requiredLength}`
         };
 
         return config[validatorName];
