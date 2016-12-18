@@ -19,7 +19,6 @@ import {PassengersControl} from './HelpControls/PassengersControl';
 import {ValidationsMessagesControl} from './HelpControls/ValidationMessagesControl';
 import {ValidationService} from './Services/ValidationService'
 import { RouterModule }   from '@angular/router';
-import {NG_ASYNC_VALIDATORS} from 'angular2/common';
 
 
 

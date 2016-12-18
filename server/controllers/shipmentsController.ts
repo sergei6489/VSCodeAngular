@@ -10,25 +10,19 @@ shipmentService= kernel.get<IShipmentService>('IShipmentService');
 router.post("/search",(req: express.Request, res: express.Response) =>
 {
     var array = new Array<ShipmentViewModel>();
-    res.setHeader('Content-Type', 'application/json');
     shipmentService.GetShipments(req.body, (error:any, result: Array<IShipment>)=>{
         result.forEach(n=>{array.push( new ShipmentViewModel(n) )});
-        res.send(JSON.stringify({result: array}));
+        res.json({result: array});
     });
 });
 router.get("/GetDirectionsFrom",(req: express.Request, res: express.Response) =>
 {
-
-    res.setHeader('Content-Type', 'application/json');
     shipmentService.GetDirectionsFrom(req.query.data,(error: any, result: any)=>{
-        res.send(JSON.stringify({result: result }));
+        res.json({result: result });
     });
-
-
 });
 router.get("/GetDirectionsTo",(req: express.Request, res: express.Response) =>
 {
-    res.setHeader('Content-Type', 'application/json');
     shipmentService.GetDirectionsTo(req.query.data,(error: any, result: any)=>{
         res.send(JSON.stringify({result: result }));
     });

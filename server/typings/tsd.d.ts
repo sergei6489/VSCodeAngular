@@ -13,4 +13,4 @@
 /// <reference path="inversify/inversify.d.ts" />
 /// <reference path="express-session/express-session.d.ts" />
 /// <reference path="reflect-metadata/reflect-metadata.d.ts" />
-/// <reference path="custom.d.ts" />
+/// <reference path="bluebird/bluebird.d.ts" />

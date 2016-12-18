@@ -1,6 +1,6 @@
 {
   "version": "v4",
-  "repo": "borisyankov/DefinitelyTyped",
+  "repo": "test",
   "ref": "master",
   "path": "typings",
   "bundle": "typings/tsd.d.ts",
@@ -40,6 +40,19 @@
     },
     "mpromise/mpromise.d.ts": {
       "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
+    },
+    "inversify/inversify.d.ts": {
+      "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
+    },
+    "express-session/express-session.d.ts": {
+      "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
+    },
+    "reflect-metadata/reflect-metadata.d.ts": {
+      "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
+    },
+        "bluebird/bluebird.d.ts": {
+      "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
     }
+
   }
 }
