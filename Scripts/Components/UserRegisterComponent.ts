@@ -11,7 +11,11 @@ import {Router} from '@angular/router';
 @Component({
         template:`<div class="offset-md-4 col-md-4">
                     <div class="card">
-                        <div class="card-header">Registration</div>
+                        <div class="card-header">Registration
+                        <a routerLink="/login" class="pull-right" style="cursor: pointer">
+                                <i class="fa fa-arrow-right"></i>LogIn 
+                        </a>
+                        </div>
                         <div class="card-block">
                             <form [formGroup]="form" class="form-horizontal">
                                 <div class="form-group" [class.has-danger]="namefc.dirty && !namefc.pending && !namefc.valid" [class.has-success]="namefc.dirty && !namefc.pending &&  namefc.valid">
@@ -42,9 +46,8 @@ import {Router} from '@angular/router';
                             </form>
                         </div>
                         <div class="card-footer">
-                               <div class="pull-md-right">
+                               <div class="offset-md-5">
                                     <button class="btn btn-outline-primary" (click)="register()">Register</button>
-                                    <a routerLink="/login" class="btn btn-outline-primary">Log in</a>
                                 </div>
                         </div>
                     </div>
@@ -61,7 +64,7 @@ export class UserRegisterComponent {
     bithdayfc = new  FormControl('', Validators.required);
     isMalefc = new FormControl('');
 
-    public constructor (@Inject('NameValidator') private validator,fb:FormBuilder,private service: UserService,public validationService: ValidationService ){
+    public constructor (@Inject('NameValidator') private validator,fb:FormBuilder,private service: UserService,public validationService: ValidationService, public router: Router ){
        
         this.form = fb.group({
             "namefc" : this.namefc,
@@ -79,7 +82,7 @@ export class UserRegisterComponent {
             this.service.register(this.newUser).then(result=> {
                 if (result==null)
                 {
-
+                   // this.router.navigate('users/login');
                 }
                 console.log("insert");
             });

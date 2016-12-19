@@ -2,6 +2,7 @@ import express = require('express');
 import path = require('path');
 var db = require('./DB/mongodb');
 import mongoose = require("mongoose");
+var flash = require('connect-flash');
 
 var cookieParser = require('cookie-parser');  
 var userController = require('./controllers/userController');
@@ -14,10 +15,11 @@ var session = require('express-session');
 db.open();
 app.use(cookieParser());  
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(flash());
 app.use(session({ secret: 'shhsecret' }));  
 app.use(passport.initialize());  
 app.use(passport.session());  
+
 
 app.use( bodyParser.json() );       
 app.use(bodyParser.urlencoded({    

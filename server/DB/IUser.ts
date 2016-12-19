@@ -2,7 +2,7 @@ import mongoose = require("mongoose");
 
 class User extends mongoose.Document
 {
-     name:string;
+     login:string;
      password:string;
      bithday: Date;
      isMale: boolean;

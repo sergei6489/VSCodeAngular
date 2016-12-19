@@ -1,6 +1,6 @@
 {
   "version": "v4",
-  "repo": "test",
+  "repo": "borisyankov/DefinitelyTyped",
   "ref": "master",
   "path": "typings",
   "bundle": "typings/tsd.d.ts",
@@ -50,9 +50,8 @@
     "reflect-metadata/reflect-metadata.d.ts": {
       "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
     },
-        "bluebird/bluebird.d.ts": {
+      "bluebird/bluebird.d.ts": {
       "commit": "a59cec35c61820b421d31ae91f9f02cad41ed197"
     }
-
   }
 }

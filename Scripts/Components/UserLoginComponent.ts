@@ -8,7 +8,11 @@ import {ValidationsMessagesControl} from "../HelpControls/ValidationMessagesCont
         template:`<div class="offset-md-4 col-md-4" style="margin-top:85px;">
                     <form [formGroup]="form" class="form-horizontal" (submit)="logIn()">
                     <div class="card">
-                    <div class="card-header">Authorization</div>
+                    <div class="card-header">Authorization
+                    <a routerLink="/register" class="hidden-md-down pull-right" style="cursor: pointer">
+                                <i class="fa fa-arrow-right"></i>Registration 
+                        </a>
+                    </div>
                     <div class="card-block">
                             <div class="form-group" [class.has-danger]="namefc.dirty && !namefc.valid">
                                 <label> Name </label>
@@ -23,10 +27,7 @@ import {ValidationsMessagesControl} from "../HelpControls/ValidationMessagesCont
                             </div>
                     </div>
                     <div class="card-footer">
-                        <div class="pull-md-right">
-                            <button class="btn btn-outline-success" type="submit">Log in</button>
-                            <a routerLink="/register" class="btn btn-outline-primary">Register</a>
-                        </div>
+                            <button class="btn btn-outline-success offset-md-5" type="submit">Log in</button>
                     </div>
                 </div> </form></div>`
     })
@@ -49,7 +50,7 @@ export class UserLoginComponent {
     {
         if (this.form.valid)
         {
-            this.service.logIn(this.name,this.password).subscribe(res=> {global.isAuth = res});
+            this.service.logIn(this.name,this.password);
         }
         else{
             this.namefc.markAsDirty();

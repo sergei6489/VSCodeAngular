@@ -15,9 +15,9 @@ export class UserService implements IUserService
     {
         _userSchema.findById(id,callback);
     }
-    public GetUserByLogin( login:string,callback: (error: any,result: User)=>void )
+    public CheckUser( login:string,password:string,callback: (error: any,result: User)=>void )
     {
-        _userSchema.findOne({login:login},callback);
+        _userSchema.findOne({login:login,password:password},callback);
     }
     public IsExistsUser( login:string, callback: (error:any, result: User)=>void )
     {
@@ -30,7 +30,7 @@ export class UserService implements IUserService
             if (result==null)
             {
                var newUser = new _userSchema({
-                    name : user.name,
+                    login : user.name,
                     password : user.password,
                     bithday : this.ConvertStringToDate(user.bithday.toString()),
                     isMale : true,

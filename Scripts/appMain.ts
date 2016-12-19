@@ -25,7 +25,7 @@ import {UserService} from "./Services/UserService";
             </ul>
          </div>
     </nav>
-     <div id="sidebar-wrapper1" class="hidden-md-down" [class.active]="menuActive==true">
+     <div id="sidebar-wrapper1"  [class.active]="menuActive==true">
         <div class="list-group">
         <a href="#" [hidden]="!isAuth || !isAdmin" class="list-group-item list-group-item-action">
                 <span class="fa fa-users"> </span> Shipments </a>

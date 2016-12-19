@@ -14,8 +14,10 @@ export class UserService extends BaseService
 
     logIn(name:string,password: string)
     {
-        return this.http.post("user/login",JSON.stringify( {name:name,password:password  }),this.options)
-        .map(this.ExtractData).catch(this.handleError);
+        return this.http.post("user/login",JSON.stringify( {name:name,password:password  }),this.options).toPromise().then(response=>{
+                alert(response);
+        }).catch(ex=>{alert(ex);})
+        //.map(this.ExtractData).catch(this.handleError);
     }
 
     logOff()
