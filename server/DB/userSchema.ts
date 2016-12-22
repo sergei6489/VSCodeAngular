@@ -19,6 +19,9 @@ var _userSchema : mongoose.Schema = new mongoose.Schema({
         },
      email:{
          type: String
+        },
+        isAdmin:{
+            type:Boolean
         }
 });
 

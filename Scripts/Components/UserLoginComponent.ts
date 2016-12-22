@@ -1,8 +1,9 @@
 ﻿import {Component} from "@angular/core";
 import {FormBuilder,FormControl,FormGroup,Validators} from "@angular/forms";
 import {UserService} from "../Services/UserService" 
-import global = require("../globalVariables")
+import {globalVariables} from "../globalVariables"
 import {ValidationsMessagesControl} from "../HelpControls/ValidationMessagesControl"
+import {Router} from "@angular/router"
 
    @Component({
         template:`<div class="offset-md-4 col-md-4" style="margin-top:85px;">
@@ -39,7 +40,7 @@ export class UserLoginComponent {
     namefc = new FormControl('',Validators.required);
     passwordfc = new FormControl('',Validators.required);
 
-    public constructor(public service: UserService,fb: FormBuilder){   
+    public constructor(public service: UserService,fb: FormBuilder, private globalVariables: globalVariables, public router: Router){   
        this.form = fb.group({
            "namefc" : this.namefc,
            "passwordfc" : this.passwordfc
@@ -50,7 +51,19 @@ export class UserLoginComponent {
     {
         if (this.form.valid)
         {
-            this.service.logIn(this.name,this.password);
+            this.service.logIn(this.name,this.password).then(data=>
+            {
+                this.globalVariables.isAuth = data.isAuth;
+                this.globalVariables.isAdmin = data.isAdmin;
+                if (!data.isAuth)
+                {
+                    this.namefc.setErrors({"loginFaild":true});
+                }
+                else
+                {
+                     this.router.navigate(['/']);
+                }
+            })
         }
         else{
             this.namefc.markAsDirty();

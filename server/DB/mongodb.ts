@@ -15,8 +15,20 @@ class DBAccess {
                 console.log("Connection to mongodb.");
             });
         Mongoose.Promise = global.Promise;
-           this.mongooseInstance = Mongoose.connect(Constants.DBConnectionString);
-           return this.mongooseInstance;
+           this.mongooseInstance = Mongoose.connect(Constants.DBConnectionString, {server: { auto_reconnect: true }});
+           
+           this.mongooseInstance.connection.on('disconnected', function(){
+                console.log('Lost MongoDB connection...');
+            });
+            this.mongooseInstance.connection.on('connected', function() {
+                console.log('Connection established to MongoDB');
+            });
+
+            this.mongooseInstance.connection.on('reconnected', function() {
+                console.log('Reconnected to MongoDB');
+                
+            });
+            return this.mongooseInstance;
         }
 }
 

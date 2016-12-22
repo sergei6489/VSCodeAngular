@@ -41,7 +41,8 @@ export  class ValidationService
             'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',
             'invalidMinPrice': 'InCorrect min price',
             'invalidMaxPrice':'Invalid max price',
-            //'minlength': `Minimum length ${validatorValue.requiredLength}`
+            'loginFaild':'Login or password not exists',
+            'minlength': `Minimum length ${validatorValue.requiredLength}`
         };
 
         return config[validatorName];

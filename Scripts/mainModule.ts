@@ -19,7 +19,7 @@ import {PassengersControl} from './HelpControls/PassengersControl';
 import {ValidationsMessagesControl} from './HelpControls/ValidationMessagesControl';
 import {ValidationService} from './Services/ValidationService'
 import { RouterModule }   from '@angular/router';
-
+import {globalVariables} from './globalVariables'
 
 
 @NgModule({
@@ -47,6 +47,7 @@ import { RouterModule }   from '@angular/router';
       UserService,
       ShipmentService,
       ValidationService,
+      globalVariables,
       SearchViewModel,
       {
         provide: 'NameValidator',

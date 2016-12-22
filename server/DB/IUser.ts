@@ -7,6 +7,7 @@ class User extends mongoose.Document
      bithday: Date;
      isMale: boolean;
      email:string;
+     isAdmin:boolean;
 }
 
 export = User;

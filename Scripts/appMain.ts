@@ -1,4 +1,5 @@
 ﻿import {Component,OnInit} from "@angular/core";
+import {globalVariables} from "./globalVariables";
 import {UserService} from "./Services/UserService";
 
 @Component({
@@ -29,13 +30,13 @@ import {UserService} from "./Services/UserService";
         <div class="list-group">
         <a href="#" [hidden]="!isAuth || !isAdmin" class="list-group-item list-group-item-action">
                 <span class="fa fa-users"> </span> Shipments </a>
-            <a href="#" [hidden]="!isAuth || !isAdmin" class="list-group-item list-group-item-action">
+            <a href="#" (click)="hideMenu()" [hidden]="!isAuth || !isAdmin" class="list-group-item list-group-item-action">
                 <span class="fa fa-users"> </span> Users </a>
-            <a routerLink="/login" [hidden]="isAuth" class="list-group-item list-group-item-action">
+            <a routerLink="/login" (click)="hideMenu()" [hidden]="isAuth" class="list-group-item list-group-item-action">
                   <span class="fa fa-sign-in fa-3"></span> Login</a>
-            <a routerLink="/register" [hidden]="isAuth" class="list-group-item list-group-item-action"> 
-                <span class="fa fa-sign-language"></span> Register</a>
-            <a href="#" [hidden]="!isAuth" class="list-group-item list-group-item-action">LogOff</a>
+            <a routerLink="/register" (click)="hideMenu()" [hidden]="isAuth" class="list-group-item list-group-item-action"> 
+                <span (click)="hideMenu()" class="fa fa-sign-language"></span> Register</a>
+            <a href="#" [hidden]="!isAuth" class="list-group-item list-group-item-action" (click)="LogOff()">LogOff</a>
         </div>
      </div>
     <div class="container-fluid" style="margin-top:60px;">
@@ -44,16 +45,21 @@ import {UserService} from "./Services/UserService";
 })
 
 export class appMain implements OnInit {
-    public isAuth:boolean;
-    public isAdmin: boolean;
     public menuActive: boolean;
-    constructor(private service: UserService) {
+    public isAdmin: boolean;
+    public isAuth: boolean;
+    constructor(private globalVariables: globalVariables,private userService: UserService ) {
         
     }
 
     ngOnInit()
     {
-        this.syncronize();
+        this.globalVariables.isAdminChanged.subscribe(data=>{
+            this.isAdmin = data;
+        })
+        this.globalVariables.isAuthChanged.subscribe(data=>{
+            this.isAuth = data;
+        })
     }
 
     showMenu()
@@ -61,11 +67,19 @@ export class appMain implements OnInit {
         this.menuActive = !this.menuActive;
     }
 
-    syncronize()
+    hideMenu()
     {
-        this.service.checkIsAuth().subscribe(res=>{
-            this.isAdmin = res.isAdmin;
-            this.isAuth = res.isAuth;
-        });
+        this.menuActive = false;
+    }
+
+    LogOff()
+    {
+        this.userService.logOff().then(data=>{
+            if (data)
+            {
+                this.globalVariables.isAdmin = false;
+                this.globalVariables.isAuth = false;
+            }
+        })
     }
 }
